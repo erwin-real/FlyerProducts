@@ -11,4 +11,6 @@ class AttributeCombination extends Model
     protected $fillable = [
         'product_id', 'attribute_value_ids'
     ];
+
+    public function product() { return $this->belongsTo('App\Product'); }
 }

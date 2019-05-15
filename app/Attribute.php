@@ -11,4 +11,6 @@ class Attribute extends Model
     protected $fillable = [
         'product_id', 'name', 'order'
     ];
+
+    public function product() { return $this->belongsTo('App\Product'); }
 }

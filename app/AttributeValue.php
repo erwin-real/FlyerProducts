@@ -12,5 +12,5 @@ class AttributeValue extends Model
         'attribute_id', 'value', 'details', 'imagepath'
     ];
 
-    public function forecast() { return $this->belongsTo('App\Attribute'); }
+    public function attribute() { return $this->belongsTo('App\Attribute'); }
 }
