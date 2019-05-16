@@ -23,13 +23,14 @@
                             @foreach($product->attributes as $attribute)
                                 @if($attribute->name != "Print, Run and Delivery")
                                     <li><a href="{{ action('AttributeController@index', $attribute->id) }}">{{$attribute->name}}</a></li>
-                                    {{--<li><a href="/attribute/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
+                                    {{--<li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
                                 @endif
                             @endforeach
                             <li>Print, Run and Delivery</li>
                         </ol>
 
-                        <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info float-left mr-2">Edit</a>
+                        <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-primary float-left mr-2">Update Product info & attributes</a>
+                        <a href="{{ action('CombinationController@create', $product) }}" class="btn btn-outline-primary float-left mr-2">Create Combination</a>
                         {{--<a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info float-left mr-2">Create Combinations</a>--}}
 
                         {{--@if(Auth::user()->type == 'admin' || Auth::user()->id == $dept->user_id)--}}

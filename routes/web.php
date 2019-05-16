@@ -20,14 +20,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('products', 'ProductController');
 
-Route::get('/attribute/{attribute}','AttributeController@index');
+// ATTRIBUTES
+Route::get('/attributes/{attribute}','AttributeController@index');
+Route::post('/attributes/{attribute}','AttributeController@store');
+Route::get('/attributes/{attribute}/create','AttributeController@create');
+
+// COMBINATIONS
+Route::get('/combinations/{product}/create','CombinationController@create');
+
+//Auth::routes();
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
-//Auth::routes();
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
