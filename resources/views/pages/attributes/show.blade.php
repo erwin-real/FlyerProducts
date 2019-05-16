@@ -22,8 +22,7 @@
                         <ol>
                             @foreach($product->attributes as $attribute)
                                 @if($attribute->name != "Print, Run and Delivery")
-                                    <li><a href="{{ action('AttributeController@index', $attribute->id) }}">{{$attribute->name}}</a></li>
-                                    {{--<li><a href="/attribute/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
+                                    <li><a href="/attribute/{{$attribute->id}}">{{$attribute->name}}</a></li>
                                 @endif
                             @endforeach
                             <li>Print, Run and Delivery</li>

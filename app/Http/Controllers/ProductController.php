@@ -44,9 +44,9 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('/products')
+        return redirect('/products/'. $product->id)
             ->with('success', 'Added New Product Successfully!')
-            ->with('products', Product::orderBy('updated_at', 'desc')->paginate(20));
+            ->with('product', $product);
     }
 
     /**
@@ -78,20 +78,35 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product) {
+        $validatedData = $request->validate([ 'name' => 'required' ]);
+
+        $product->name = $validatedData['name'];
+        $product->details = $request->get('details');
+
+        $product->save();
+
         foreach ($product->attributes as $attribute) $attribute->delete();
 
         for ($i = 0; $i < count($request->get('attribute')); $i++) {
             $attribute = new Attribute(array(
                 'product_id' => $product->id,
-                'name' => $request->get('attribute')[$i]
+                'name' => $request->get('attribute')[$i],
+                'order' => $i+1
             ));
 
             $attribute->save();
         }
+        $attribute = new Attribute(array(
+            'product_id' => $product->id,
+            'name' => 'Print, Run and Delivery',
+            'order' => count($request->get('attribute'))+1
+        ));
 
-        return redirect('/products')
+        $attribute->save();
+
+        return redirect('/products/'. $product->id)
             ->with('success', 'Updated Product Successfully!')
-            ->with('products', Product::orderBy('updated_at', 'desc')->paginate(20));
+            ->with('product', $product);
     }
 
     /**
