@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Attribute {{$attribute->name}} for {{$attribute->product->name}}</div>
+                <div class="card-header">Attribute {{$attribute->name}} for <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a></div>
 
                 <div class="card-body">
                     @if (session('success'))
