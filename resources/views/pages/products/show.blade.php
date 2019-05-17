@@ -13,6 +13,11 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <div class="card-body mt-2">
                         <p><strong>Product Name</strong>: {{$product->name}}</p>
@@ -30,7 +35,12 @@
                         </ol>
 
                         <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-primary float-left mr-2">Update Product info & attributes</a>
-                        <a href="{{ action('CombinationController@create', $product) }}" class="btn btn-outline-primary float-left mr-2">Create Combination</a>
+
+                        @if(count($product->attributes) > 0)
+                            <a href="{{ action('CombinationController@create', $product) }}" class="btn btn-outline-primary float-left mr-2">Create Combination</a>
+                            <a href="{{ action('CombinationController@test', $product) }}" class="btn btn-outline-primary float-left mr-2">Test</a>
+                        @endif
+
                         {{--<a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info float-left mr-2">Create Combinations</a>--}}
 
                         {{--@if(Auth::user()->type == 'admin' || Auth::user()->id == $dept->user_id)--}}

@@ -28,6 +28,7 @@ Route::get('/attributes/{attribute}/create','AttributeController@create');
 // COMBINATIONS
 Route::get('/combinations/{product}/create','CombinationController@create');
 Route::post('/combinations/{product}','CombinationController@store');
+Route::get('/combinations/{product}/test','CombinationController@test');
 
 //Auth::routes();
 

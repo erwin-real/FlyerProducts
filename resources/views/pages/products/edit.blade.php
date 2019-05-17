@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit Product</div>
+                <div class="card-header">Edit Product: <a href="/products/{{$product->id}}">{{$product->name}}</a></div>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -44,10 +44,11 @@
                                         <ol id="attributes">
                                             @foreach($product->attributes as $attribute)
                                                 @if($attribute->name != "Print, Run and Delivery")
-                                                    <li><input type="text" name="attribute[]" value="{{$attribute->name}}"> <span class="text-danger" style="cursor: pointer;" onclick="deleteItem(this)">x</span></li>
+                                                    <li><input type="text" name="attribute[]" value="{{$attribute->name}}" required></li>
+                                                    {{--<li><input type="text" name="attribute[]" value="{{$attribute->name}}"> <span class="text-danger" style="cursor: pointer;" onclick="deleteItem(this)">x</span></li>--}}
                                                 @endif
                                             @endforeach
-                                            <li>Print, Run and Delivery</li>
+                                            <li><input type="hidden" name="attribute[]" value="Print, Run and Delivery">Print, Run and Delivery</li>
                                         </ol>
                                     </div>
                                     <a class="ml-3 btn btn-outline-primary" onclick="append()">Add Attribute</a>
@@ -75,6 +76,7 @@
         let node_value = document.createElement("input");
         node_value.type = 'text';
         node_value.name = 'attribute[]';
+        node_value.setAttribute("required", "required");
         newItem.appendChild(node_value);
 
         let list = document.getElementById("attributes");

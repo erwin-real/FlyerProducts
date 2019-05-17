@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index() {
         return view('pages.products.index')->with('products', Product::all());
     }
@@ -44,6 +48,7 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product) {
+        dd($request);
         $validatedData = $request->validate([ 'name' => 'required' ]);
 
         $product->name = $validatedData['name'];

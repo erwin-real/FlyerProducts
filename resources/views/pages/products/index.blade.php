@@ -44,7 +44,7 @@
                         @endif
                     </div>
 
-                    <a href="/products/create" class="btn btn-outline-success">Add Product</a>
+                    {{--<a href="/products/create" class="btn btn-outline-success">Add Product</a>--}}
                 </div>
             </div>
         </div>
