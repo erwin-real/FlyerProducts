@@ -48,7 +48,6 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product) {
-        dd($request);
         $validatedData = $request->validate([ 'name' => 'required' ]);
 
         $product->name = $validatedData['name'];

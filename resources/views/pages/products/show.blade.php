@@ -38,7 +38,7 @@
 
                         @if(count($product->attributes) > 0)
                             <a href="{{ action('CombinationController@create', $product) }}" class="btn btn-outline-primary float-left mr-2">Create Combination</a>
-                            <a href="{{ action('CombinationController@test', $product) }}" class="btn btn-outline-primary float-left mr-2">Test</a>
+{{--                            <a href="{{ action('CombinationController@test', $product) }}" class="btn btn-outline-primary float-left mr-2">Test</a>--}}
                         @endif
 
                         {{--<a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info float-left mr-2">Create Combinations</a>--}}
