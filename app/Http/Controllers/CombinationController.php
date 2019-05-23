@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AttributeCombination;
+use App\Price;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,15 @@ class CombinationController extends Controller
         ));
 
         $attributeCombination->save();
+
+        for ($i = 0; $i < count($request->get('quantity')); $i++) {
+            $price = new Price(array(
+                'attribute_combination_id' => $attributeCombination->id,
+                'quantity' => $request->get('quantity')[$i],
+                'price' => $request->get('price')[$i]
+            ));
+            $price->save();
+        }
 
         return redirect('/products/'. $product->id)
             ->with('success', 'Added New Combination Successfully!')

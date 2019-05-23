@@ -13,4 +13,5 @@ class AttributeCombination extends Model
     ];
 
     public function product() { return $this->belongsTo('App\Product'); }
+    public function prices() { return $this->hasMany('App\Price'); }
 }

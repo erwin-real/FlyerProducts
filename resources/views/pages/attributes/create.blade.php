@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add Attribute Value</div>
+                <div class="card-header">
+                    <a href="/products">Products</a> /
+                    <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a> /
+                    <a href="/attributes/{{$attribute->id}}">Attribute {{$attribute->name}}</a> /
+                    Add attribute value
+                </div>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -15,7 +20,7 @@
                     @endif
 
                         <div class="card-body mt-2">
-                            <p>Product: {{$attribute->product->name}}</p>
+                            <p>Product: <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a></p>
                             <p>Attribute: {{$attribute->name}}</p>
                             <form action="{{ action('AttributeController@store', $attribute) }}" method="POST">
                                 @foreach ($errors->all() as $error)
@@ -43,7 +48,7 @@
 
                                     <div class="form-group">
                                         <div class="col-lg-10 col-lg-offset-2">
-                                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                            <button type="submit" class="btn btn-outline-primary"><i class="fa fa-check"></i> Submit</button>
                                         </div>
                                     </div>
                                 </fieldset>

@@ -5,7 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Attribute {{$attribute->name}} for {{$attribute->product->name}}</div>
+                <div class="card-header">
+                    <a href="/products">Products</a> /
+                    <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a> /
+                    Attribute {{$attribute->name}}
+                </div>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -43,7 +47,7 @@
                         @endif
                     </div>
 
-                    <a href="/attributes/{{$attribute->id}}/create" class="btn btn-outline-success">Add Value</a>
+                    <a href="/attributes/{{$attribute->id}}/create" class="btn btn-outline-success"><i class="fa fa-plus"></i> Add Value</a>
                 </div>
             </div>
         </div>

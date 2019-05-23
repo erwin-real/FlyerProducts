@@ -14,7 +14,6 @@ class Product extends Model
     ];
 
     public function attributes() { return $this->hasMany('App\Attribute'); }
-
     public function attributeCombinations() { return $this->hasMany('App\AttributeCombination'); }
 
 }

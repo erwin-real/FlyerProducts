@@ -36,7 +36,7 @@ class AttributeController extends Controller
     }
 
     public function show($id) {
-        //
+        return view('pages.attributes.show')->with('attribute', Attribute::find($id));
     }
 
     public function edit($id) {
