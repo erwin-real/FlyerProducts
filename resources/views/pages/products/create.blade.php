@@ -4,13 +4,10 @@
 
     {{-- Right Content --}}
     <div class="body-right">
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <h1 class="h2 mb-0 text-gray-800">Add Product</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page">
-                        <a href="/">Dashboard</a>
-                    </li>
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
@@ -26,7 +23,7 @@
 
                     <div class="card-body">
 
-                        <form method="POST" action="/products">
+                        <form action="{{ action('AttributeController@store', $attribute) }}" method="POST">
                             @csrf
 
                             <div class="form-group row">

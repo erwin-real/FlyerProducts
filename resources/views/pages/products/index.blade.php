@@ -2,15 +2,12 @@
 
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
 
         <!-- Page Heading -->
         <h1 class="h2 mb-0 text-gray-800">Products</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item" aria-current="page">
-                    <a href="/">Dashboard</a>
-                </li>
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
             </ol>
         </nav>
@@ -23,7 +20,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <h5 class="float-left">Products</h5>
-                        <a href="/products/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Product</a>
+                        {{--<a href="/products/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Product</a>--}}
                         <div class="clearfix"></div>
                     </div>
 

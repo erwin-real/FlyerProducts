@@ -1,90 +1,86 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <a href="/products">Products</a> /
-                    <a href="/products/{{$product->id}}">{{$product->name}}</a> /
-                    Create Combination
-                </div>
 
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+    {{-- Right Content --}}
+    <div class="body-right">
+        <div class="container-fluid mb-5">
+            <h1 class="h2 mb-0 text-gray-800">Print, Run and Delivery</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/products">Products</a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/products/{{$product->id}}">{{$product->name}}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Print, Run and Delivery</li>
+                </ol>
+            </nav>
 
-                        <div class="card-body mt-2">
-                            <p>Product: <a href="/products/{{$product->id}}">{{$product->name}}</a></p>
-                            {{--<p>Attribute: {{$attribute->name}}</p>--}}
-                            <form action="{{ action('CombinationController@store', $product) }}" method="POST">
-                                @foreach ($errors->all() as $error)
-                                    <p class="alert alert-danger">{{ $error }}</p>
-                                @endforeach
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
+            @include('includes.messages')
+
+            <div class="container-fluid mt-5 col-lg-6 col-sm-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header">Print, Run and Delivery</div>
+
+                    <div class="card-body">
+
+                        <form action="{{ action('CombinationController@store', $product) }}" method="POST">
+                            @csrf
+
+
+                            @foreach($product->attributes as $attribute)
+                                @if($attribute->name != "Print, Run and Delivery")
+                                    <div class="form-group">
+                                        <label for="value" class="col-lg-12 control-label">{{$attribute->name}} <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <select id="value" name="combinations[]" class="form-control" required autofocus>
+                                                @foreach($attribute->attributeValues as $attributeValue)
+                                                    <option value="{{$attributeValue->id}}">{{$attributeValue->value}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 @endif
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                                @foreach($product->attributes as $attribute)
-                                    @if($attribute->name != "Print, Run and Delivery")
-                                        <div class="form-group">
-                                            <label for="value" class="col-lg-12 control-label">{{$attribute->name}} <span class="text-danger">*</span></label>
-                                            <div class="col-lg-12">
-                                                <select id="value" name="combinations[]" class="form-control" required autofocus>
-                                                    @foreach($attribute->attributeValues as $attributeValue)
-                                                        <option value="{{$attributeValue->id}}">{{$attributeValue->value}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
+                            @endforeach
 
 
-                                <div class="form-group">
-                                    <label for="value" class="col-lg-12 control-label">Print, Run and Delivery <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <label for="value" class="col-lg-12 control-label">Print, Run and Delivery <span class="text-danger">*</span></label>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="materialsTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Quantity<span class="text-danger">*</span></th>
-                                                    <th>Price/unit<span class="text-danger">*</span></th>
-                                                    <th>Del</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="materialsBody">
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <a class="ml-3 btn btn-outline-primary mt-5" onclick="addRow()"><i class="fas fa-plus"></i> Add new row</a>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="materialsTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Quantity<span class="text-danger">*</span></th>
+                                            <th>Price/unit<span class="text-danger">*</span></th>
+                                            <th>Del</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="materialsBody">
+                                        </tbody>
+                                    </table>
                                 </div>
 
-                                <div class="form-group mt-5 text-center">
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-check"></i> Save</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                <button type="button" class="ml-3 btn btn-outline-primary mt-5" onclick="addRow()"><i class="fas fa-plus"></i> Add new row</button>
+                            </div>
 
+                            <div class="form-group mt-5 text-center">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-check"></i> Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function addRow() {
-        // if (document.getElementsByClassName('select-class').length < totalMaterials ) {
+    <script>
+        function addRow() {
+            // if (document.getElementsByClassName('select-class').length < totalMaterials ) {
             let td, tr;
             let tbody = document.getElementById("materialsBody");
 
@@ -120,12 +116,12 @@
             tr.appendChild(td);
 
             tbody.appendChild(tr);
-        // }
-    }
-    function deleteRow(r) {
-        let i = (r.parentNode.parentNode.rowIndex);
-        document.getElementById("materialsTable").deleteRow(i);
-    }
-</script>
+            // }
+        }
+        function deleteRow(r) {
+            let i = (r.parentNode.parentNode.rowIndex);
+            document.getElementById("materialsTable").deleteRow(i);
+        }
+    </script>
 
 @endsection

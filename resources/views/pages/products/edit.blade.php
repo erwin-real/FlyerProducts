@@ -4,13 +4,10 @@
 
     {{-- Right Content --}}
     <div class="body-right">
-        <div class="container-fluid">
+        <div class="container-fluid mb-5">
             <h1 class="h2 mb-0 text-gray-800">Update Product</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page">
-                        <a href="/">Dashboard</a>
-                    </li>
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
@@ -48,11 +45,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="details" class="col-md-12 col-form-label text-md-left">{{ __('Product\'s Details') }} <span class="text-danger">*</span></label>
+                                <label for="details" class="col-md-12 col-form-label text-md-left">Product Details <span class="text-danger">*</span></label>
 
                                 <div class="col-md-12">
-                                    <input id="details" type="text" class="form-control{{ $errors->has('details') ? ' is-invalid' : '' }}" name="details" value="{{$product->details}}" required autofocus>
-
+                                    <textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus>{{$product->details}}</textarea>
                                     @if ($errors->has('details'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('details') }}</strong>

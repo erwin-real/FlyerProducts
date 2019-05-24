@@ -1,57 +1,65 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <a href="/products">Products</a> /
-                    <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a> /
-                    Attribute {{$attribute->name}}
-                </div>
 
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+    <div class="container-fluid mb-5">
+
+        <!-- Page Heading -->
+        <h1 class="h2 mb-0 text-gray-800">Combinations</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">
+                    <a href="/products">Products</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">
+                    <a href="/products/{{$product->id}}">{{$product->name}}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Combinations</li>
+            </ol>
+        </nav>
+
+    @include('includes.messages')
+
+    <!-- Content Row -->
+        <div class="row">
+            <div class="container-fluid">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="float-left">Combinations</h5>
+                        {{--<a href="/products/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Product</a>--}}
+                        <div class="clearfix"></div>
+                    </div>
 
                     <div class="card-body mt-2">
-                        @if ($attribute->attributeValues->isEmpty())
-                            <p> There are no attribute values yet.</p>
+                        @if ($product->attributeCombinations->isEmpty())
+                            <p> There are no combinations yet.</p>
                         @else
                             {{--{{$products->links()}}--}}
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover text-center">
                                     <thead>
-                                        <tr>
-                                            <th>Value</th>
-                                            <th>Details</th>
-                                            <th>Image Path</th>
-                                        </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        @foreach($product->attributes as $attribute)
+                                            @if($attribute->name != "Print, Run and Delivery")
+                                                <th>{{$attribute->name}}</th>
+                                            @endif
+                                        @endforeach
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($attribute->attributeValues as $attributeValue)
-                                        <tr>
-                                            {{--<td><a href="/products/{{$product->id}}">{{$product->name}}</a></td>--}}
-                                            <td>{{$attributeValue->value}}</td>
-                                            <td>{{$attributeValue->details}}</td>
-                                            <td>{{$attributeValue->imagepath}}</td>
-                                        </tr>
-                                    @endforeach
+                                    CSV | ATTRIBUTE VALUE IDS | FIND BY IDS
                                     </tbody>
                                 </table>
                             </div>
                         @endif
                     </div>
-
-                    <a href="/attributes/{{$attribute->id}}/create" class="btn btn-outline-success"><i class="fa fa-plus"></i> Add Value</a>
                 </div>
+
             </div>
         </div>
+
+
     </div>
-</div>
 
 @endsection

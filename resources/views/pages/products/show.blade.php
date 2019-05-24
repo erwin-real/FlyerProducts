@@ -9,9 +9,6 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
@@ -63,7 +60,10 @@
                             </div>
                         </div>
 
-                        <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info float-left mr-2"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
+                        <div class="w-100 text-center">
+                            <a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
+                            <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
+                        </div>
 
                         {{--DELETE BUTTON--}}
                         {{--<button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">--}}

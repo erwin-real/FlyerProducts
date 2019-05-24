@@ -19,7 +19,9 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-    <li class="nav-item {{ request()->is('products') || request()->is('products/*') ? 'active border-left-info' : '' }}">
+    <li class="nav-item {{ request()->is('products') || request()->is('products/*')
+        || request()->is('attributes') || request()->is('attributes/*')
+        || request()->is('combinations') || request()->is('combinations/*') ? 'active border-left-info' : '' }}">
         <a class="nav-link" href="/products">
             <i class="fas fa-fw fa-puzzle-piece"></i>
             <span>Products</span></a>

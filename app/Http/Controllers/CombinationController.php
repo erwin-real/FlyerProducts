@@ -14,8 +14,8 @@ class CombinationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
-        //
+    public function index(Product $product) {
+        return view('pages.combinations.index')->with('product', $product);
     }
 
     public function create(Product $product) {
