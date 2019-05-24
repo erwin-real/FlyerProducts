@@ -48,7 +48,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    CSV | ATTRIBUTE VALUE IDS | FIND BY IDS
+                                        @foreach($product->attributeCombinations as $attributeCombination)
+                                            <tr>
+                                                <td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>
+                                                @foreach(explode(",",$attributeCombination->attribute_value_ids) as $id)
+                                                    <td>{{\App\Http\Controllers\CombinationController::findById($id)->value}}</td>
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

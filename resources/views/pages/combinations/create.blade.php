@@ -26,9 +26,9 @@
 
                     <div class="card-body">
 
-                        <form action="{{ action('CombinationController@store', $product) }}" method="POST">
+                        <form action="/combinations" method="POST">
                             @csrf
-
+                            <input type="hidden" name="id" value="{{$product->id}}">
 
                             @foreach($product->attributes as $attribute)
                                 @if($attribute->name != "Print, Run and Delivery")

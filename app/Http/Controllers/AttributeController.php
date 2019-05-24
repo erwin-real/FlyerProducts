@@ -13,11 +13,12 @@ class AttributeController extends Controller
         return view('pages.attributes.index')->with('attribute', $attribute);
     }
 
-    public function create(Attribute $attribute) {
-        return view('pages.attributes.create')->with('attribute', $attribute);
+    public function create(Request $request) {
+        return view('pages.attributes.create')->with('attribute', Attribute::find($request->get('id')));
     }
 
-    public function store(Attribute $attribute, Request $request) {
+    public function store(Request $request) {
+        $attribute = Attribute::find($request->get('id'));
         $validatedData = $request->validate([
             'value' => 'required'
         ]);

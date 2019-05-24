@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AttributeCombination;
+use App\AttributeValue;
 use App\Price;
 use App\Product;
 use Illuminate\Http\Request;
@@ -14,15 +15,16 @@ class CombinationController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Product $product) {
-        return view('pages.combinations.index')->with('product', $product);
+    public function index(Request $request) {
+        return view('pages.combinations.index')->with('product', Product::find($request->get('id')));
     }
 
-    public function create(Product $product) {
-        return view('pages.combinations.create')->with('product', $product);
+    public function create(Request $request) {
+        return view('pages.combinations.create')->with('product', Product::find($request->get('id')));
     }
 
-    public function store(Product $product, Request $request) {
+    public function store(Request $request) {
+        $product = Product::find($request->get('id'));
         $temp = $request->get('combinations')[0];
         for ($i = 1; $i < count($request->get('combinations')); $i++)
             $temp .= ','.$request->get('combinations')[$i];
@@ -56,7 +58,7 @@ class CombinationController extends Controller
     }
 
     public function show($id) {
-        //
+        return view('pages.combinations.show')->with('attributeCombination', AttributeCombination::find($id));
     }
 
     public function edit($id) {
@@ -71,7 +73,7 @@ class CombinationController extends Controller
         //
     }
 
-    public function test(Product $product) {
-        //
+    public static function findById($id) {
+        return AttributeValue::find($id);
     }
 }

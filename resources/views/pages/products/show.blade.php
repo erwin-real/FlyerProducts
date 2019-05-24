@@ -52,7 +52,7 @@
                                         @endif
                                     @endforeach
                                     @if(count($product->attributes) > 0 && count($product->attributes[0]->attributeValues) > 0 )
-                                        <li><a href="{{ action('CombinationController@create', $product) }}">Print, Run and Delivery</a></li>
+                                        <li><a href="/combinations/create?id={{$product->id}}">Print, Run and Delivery</a></li>
                                     @else
                                         <li>Print, Run and Delivery</li>
                                     @endif
@@ -61,7 +61,8 @@
                         </div>
 
                         <div class="w-100 text-center">
-                            <a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
+                            <a href="/combinations?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
+                            {{--<a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
                             <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
                         </div>
 

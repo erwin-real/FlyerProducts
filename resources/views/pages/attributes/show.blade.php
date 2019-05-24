@@ -26,7 +26,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <h5 class="float-left">Attribute Values</h5>
-                        <a href="/attributes/{{$attribute->id}}/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Value</a>
+                        <a href="/attributes/create?id={{$attribute->id}}" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Value</a>
                         <div class="clearfix"></div>
                     </div>
 

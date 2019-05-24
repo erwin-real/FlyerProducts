@@ -18,18 +18,19 @@ Route::get('/', function () {
 
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::resource('combinations', 'CombinationController');
 Route::resource('products', 'ProductController');
 Route::resource('attributes', 'AttributeController');
 
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');
-Route::post('/attributes/{attribute}','AttributeController@store');
-Route::get('/attributes/{attribute}/create','AttributeController@create');
+//Route::post('/attributes/{attribute}','AttributeController@store');
+//Route::get('/attributes/{attribute}/create','AttributeController@create');
 
 // COMBINATIONS
-Route::get('/combinations/{product}/create','CombinationController@create');
-Route::post('/combinations/{product}','CombinationController@store');
-Route::get('/combinations/{product}','CombinationController@index');
+//Route::get('/combinations/{product}/create','CombinationController@create');
+//Route::post('/combinations/{product}','CombinationController@store');
+//Route::get('/combinations/{product}','CombinationController@index');
 
 //Auth::routes();
 
