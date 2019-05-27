@@ -41,9 +41,9 @@
                                     <tr>
                                         <th>ID</th>
                                         @foreach($product->attributes as $attribute)
-                                            @if($attribute->name != "Print, Run and Delivery")
+{{--                                            @if($attribute->name != "Print, Run and Delivery")--}}
                                                 <th>{{$attribute->name}}</th>
-                                            @endif
+                                            {{--@endif--}}
                                         @endforeach
                                     </tr>
                                     </thead>

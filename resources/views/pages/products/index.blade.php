@@ -37,6 +37,7 @@
                                         <th>Details</th>
                                         <th>Date Added</th>
                                         <th>Date Modified</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -46,6 +47,9 @@
                                             <td>{{ $product->details }}</td>
                                             <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
                                             <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>
+                                            <td>
+                                                <a href=""><i class="fa fa-tools"></i></a> <a href=""><i class="fa fa-cogs"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
