@@ -17,6 +17,7 @@ class CreateAttributeCombinationsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('product_id');
             $table->string('attribute_value_ids');
+            $table->unsignedInteger('parent');
         });
     }
 
