@@ -48,7 +48,8 @@
                                             <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
                                             <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>
                                             <td>
-                                                <a href=""><i class="fa fa-tools"></i></a> <a href=""><i class="fa fa-cogs"></i></a>
+                                                <a href="/products/{{$product->id}}/edit"><i class="fa fa-tools"></i></a>
+                                                <a href="/combinations?id={{$product->id}}"><i class="fa fa-cogs"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -26,7 +26,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <h5 class="float-left">Combinations</h5>
-                        {{--<a href="/products/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Product</a>--}}
+                        <a href="/products/create" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Product</a>
                         <div class="clearfix"></div>
                     </div>
 

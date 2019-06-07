@@ -9,7 +9,7 @@ class AttributeCombination extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'product_id', 'attribute_value_ids'
+        'product_id', 'attribute_value_ids', 'parent'
     ];
 
     public function product() { return $this->belongsTo('App\Product'); }
