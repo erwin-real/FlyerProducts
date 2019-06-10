@@ -41,37 +41,50 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Attributes') }}</b></label>
+                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Combinations') }}</b></label>
 
                             <div class="offset-1 col-10">
                                 <ol>
-                                    @foreach($product->attributes as $attribute)
-                                        @if($attribute->name != "Print, Run and Delivery")
-                                            <li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>
-                                            {{--<li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
-                                        @endif
+                                    @foreach($attributeValues as $attributeValue)
+                                        <li>
+                                            <span class="font-weight-bold">{{$attributeValue->attribute->name}}</span><br />
+                                            <span class="ml-3">{{$attributeValue->value}}</span><br /><br />
+                                        </li>
                                     @endforeach
-                                    @if(count($product->attributes) > 0 && count($product->attributes[0]->attributeValues) > 0 )
-                                        <li><a href="/combinations/create?id={{$product->id}}">Print, Run and Delivery</a></li>
-                                    @else
-                                        <li>Print, Run and Delivery</li>
-                                    @endif
                                 </ol>
                             </div>
                         </div>
 
-                        <div class="w-100 text-center">
-                            <a href="/combinations/all?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> TEST</a><br />
-                            <a href="/combinations?id={{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
-                            {{--<a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
-                            <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
+                        <div class="form-group row">
+                            <label for="table" class="col-md-12 col-form-label text-md-left"><b>{{ __('Table') }}</b></label>
+                        @if($attributeCombination != null)
+                            <div class="table-responsive">
+                                <table class="table table-hover text-center">
+                                    <thead>
+                                    <tr>
+                                        <th>Value</th>
+                                        <th>Details</th>
+                                        <th>Image Path</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($attribute->attributeValues as $attributeValue)
+                                        <tr>
+                                            <td>{{ $attributeValue->value }}</td>
+                                            <td>{{ $attributeValue->details }}</td>
+                                            <td>{{ $attributeValue->imagepath }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+
+                        @endif
                         </div>
 
-                        {{--DELETE BUTTON--}}
-                        {{--<button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">--}}
-                        {{--<i class="fas fa-trash fa-sm fa-fw"></i>--}}
-                        {{--Delete--}}
-                        {{--</button>--}}
+
+
                         <div class="clearfix"></div>
                     </div>
 

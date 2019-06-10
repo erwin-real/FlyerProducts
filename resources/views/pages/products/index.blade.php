@@ -32,27 +32,27 @@
                             <div class="table-responsive">
                                 <table class="table table-hover text-center">
                                     <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Details</th>
-                                        <th>Date Added</th>
-                                        <th>Date Modified</th>
-                                        <th>Actions</th>
-                                    </tr>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Details</th>
+                                            <th>Date Added</th>
+                                            <th>Date Modified</th>
+                                            <th>Actions</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $product)
-                                        <tr>
-                                            <td><a href="/products/{{$product->id}}">{{$product->name}}</a></td>
-                                            <td>{{ $product->details }}</td>
-                                            <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
-                                            <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>
-                                            <td>
-                                                <a href="/products/{{$product->id}}/edit"><i class="fa fa-tools"></i></a>
-                                                <a href="/combinations?id={{$product->id}}"><i class="fa fa-cogs"></i></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        @foreach($products as $product)
+                                            <tr>
+                                                <td><a href="/products/{{$product->id}}">{{$product->name}}</a></td>
+                                                <td>{{ $product->details }}</td>
+                                                <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
+                                                <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>
+                                                <td>
+                                                    <a href="/products/{{$product->id}}/edit"><i class="fa fa-tools"></i></a>
+                                                    <a href="/combinations?id={{$product->id}}"><i class="fa fa-cogs"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

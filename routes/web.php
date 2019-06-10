@@ -17,10 +17,8 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', 'DashboardController@index');
-
-Route::resource('combinations', 'CombinationController');
-Route::resource('products', 'ProductController');
-Route::resource('attributes', 'AttributeController');
+Route::get('/combinations/all', 'CombinationController@testForm');
+Route::post('/combinations/all', 'CombinationController@test');
 
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');
@@ -47,3 +45,8 @@ Route::post('register', 'Auth\RegisterController@register');
 //Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 //Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 //Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+// RESOURCES
+Route::resource('combinations', 'CombinationController');
+Route::resource('products', 'ProductController');
+Route::resource('attributes', 'AttributeController');

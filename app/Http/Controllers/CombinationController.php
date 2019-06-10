@@ -76,4 +76,30 @@ class CombinationController extends Controller
     public static function findById($id) {
         return AttributeValue::find($id);
     }
+
+    public function testForm(Request $request) {
+        return view('pages.combinations.testForm')->with('product', Product::find($request->input('id')));
+    }
+
+    public function test(Request $request) {
+        $attributeCombination = null;
+        $attributeValues = collect();
+        $combination = $request->input('combinations')[0];
+        $attributeValues->push(AttributeValue::find($request->input('combinations')[0]));
+
+        for ($i = 1; $i < count($request->input('combinations')); $i++) {
+            $combination .= ',' . $request->input('combinations')[$i];
+            $attributeValues->push(AttributeValue::find($request->input('combinations')[$i]));
+        }
+
+        foreach (AttributeCombination::all() as $item)
+            if ($item->attribute_value_ids == $combination) $attributeCombination = $item;
+
+        return view('pages.combinations.test')
+            ->with('product', Product::find($request->input('id')))
+            ->with('attributeCombination', $attributeCombination)
+            ->with('attributeValues', $attributeValues);
+
+
+    }
 }
