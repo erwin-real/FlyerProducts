@@ -5,16 +5,16 @@
     {{-- Right Content --}}
     <div class="body-right">
         <div class="container-fluid mb-5">
-            <h1 class="h2 mb-0 text-gray-800">Create Combination</h1>
+            <h1 class="h2 mb-0 text-gray-800">Modify Combination</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/products/{{$product->id}}">{{$product->name}}</a>
+                        <a href="/products/{{$attributeCombination->product->id}}">{{$attributeCombination->product->name}}</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Create Combination</li>
+                    <li class="breadcrumb-item active" aria-current="page">Modify Combination</li>
                 </ol>
             </nav>
 
@@ -22,13 +22,14 @@
 
             <div class="container-fluid mt-5 col-lg-6 col-sm-7">
                 <div class="card shadow mb-4">
-                    <div class="card-header">Create Combination</div>
+                    <div class="card-header">Modify Combination</div>
 
                     <div class="card-body">
 
-                        <form action="/combinations" method="POST">
+                        <form action="{{ action('CombinationController@update', $attributeCombination->id) }}" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
                             @csrf
-                            <input type="hidden" name="id" value="{{$product->id}}">
+                            <input type="hidden" name="id" value="{{$attributeCombination->product->id}}">
                             <input type="hidden" name="ids" value="{{$ids}}">
 
 
@@ -37,16 +38,15 @@
 
                                 <div class="offset-1 col-10">
                                     <ol>
-                                        @foreach($attributeValues as $attributeValue)
+                                        @foreach(explode(",",$attributeCombination->attribute_value_ids) as $id)
                                             <li>
-                                                <span class="font-weight-bold">{{$attributeValue->attribute->name}}</span><br />
-                                                <span class="ml-3">{{$attributeValue->value}}</span><br /><br />
+                                                <span class="font-weight-bold">{{\App\Http\Controllers\CombinationController::findById($id)->attribute->name}}</span><br />
+                                                <span class="ml-3">{{\App\Http\Controllers\CombinationController::findById($id)->value}}</span><br /><br />
                                             </li>
                                         @endforeach
                                     </ol>
                                 </div>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="value" class="col-lg-12 control-label">Print, Run and Delivery <span class="text-danger">*</span></label>
@@ -61,6 +61,17 @@
                                         </tr>
                                         </thead>
                                         <tbody id="materialsBody">
+                                            @foreach($attributeCombination->prices as $price)
+                                                <tr>
+                                                    <td>
+                                                        <input type="number" name="quantity[]" class="form-control" required="required" value="{{$price->quantity}}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="price[]" class="form-control" required="required" value="{{$price->price}}">
+                                                    </td>
+                                                    <td class="text-center"><i class="fa fa-trash del-btn" onclick="deleteRow(this)" style="cursor: pointer;"></i></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -120,6 +131,7 @@
             tbody.appendChild(tr);
             // }
         }
+
         function deleteRow(r) {
             let i = (r.parentNode.parentNode.rowIndex);
             document.getElementById("materialsTable").deleteRow(i);

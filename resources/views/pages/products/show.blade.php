@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="w-100 text-center">
-                            <a href="/combinations/all?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> TEST</a><br />
+{{--                            <a href="/combinations/all?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
                             <a href="/combinations?id={{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
                             {{--<a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
                             <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>

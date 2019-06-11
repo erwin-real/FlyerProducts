@@ -11,7 +11,11 @@
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/products/{{$product->id}}">{{$product->name}}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Combinations</li>
                 </ol>
             </nav>
 
@@ -20,7 +24,7 @@
             <div class="mt-5 col-lg-7 col-sm-8">
                 <div class="card shadow">
                     <div class="card-header ">
-                        <h5>Product's Information</h5>
+                        <h5>Product's Combinations</h5>
                         <div class="clearfix"></div>
                     </div>
                     <div class="card-body">
@@ -40,11 +44,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row m-0">
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Combinations') }}</b></label>
 
                             <div class="offset-1 col-10">
-                                <ol>
+                                <ol class="m-0">
                                     @foreach($attributeValues as $attributeValue)
                                         <li>
                                             <span class="font-weight-bold">{{$attributeValue->attribute->name}}</span><br />
@@ -56,34 +60,45 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="table" class="col-md-12 col-form-label text-md-left"><b>{{ __('Table') }}</b></label>
-                        @if($attributeCombination != null)
-                            <div class="table-responsive">
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                    <tr>
-                                        <th>Value</th>
-                                        <th>Details</th>
-                                        <th>Image Path</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($attribute->attributeValues as $attributeValue)
-                                        <tr>
-                                            <td>{{ $attributeValue->value }}</td>
-                                            <td>{{ $attributeValue->details }}</td>
-                                            <td>{{ $attributeValue->imagepath }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @else
+                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Print, Run & Delivery') }}</b></label>
 
-                        @endif
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($attributeCombination->prices as $price)
+                                            <tr>
+                                                <td>{{$price->quantity}}</td>
+                                                <td>{{$price->price}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="action" class="col-md-12 col-form-label text-md-left"><b>{{ __('Action') }}</b></label>
 
+                            <div class="offset-1 col-10">
+                                @if($attributeCombination != null)
+                                    <div class="offset-1 col-10">
+                                        <a href="/combinations/{{$attributeCombination->id}}/edit?ids={{$combination}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
+                                    </div>
+                                @else
+                                    <div class="offset-1 col-10">
+                                        <a href="/combinations/create?ids={{$combination}}&id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create</a>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="clearfix"></div>
                     </div>

@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', 'DashboardController@index');
-Route::get('/combinations/all', 'CombinationController@testForm');
-Route::post('/combinations/all', 'CombinationController@test');
+//Route::get('/combinations/all', 'CombinationController@testForm');
+Route::post('/combinations/evaluate', 'CombinationController@evaluate');
 
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');
