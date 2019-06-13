@@ -51,11 +51,7 @@
                                             {{--<li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
                                         @endif
                                     @endforeach
-                                    @if(count($product->attributes) > 0 && count($product->attributes[0]->attributeValues) > 0 )
-                                        <li><a href="/combinations/create?id={{$product->id}}">Print, Run and Delivery</a></li>
-                                    @else
-                                        <li>Print, Run and Delivery</li>
-                                    @endif
+                                    <li>Print, Run and Delivery</li>
                                 </ol>
                             </div>
                         </div>

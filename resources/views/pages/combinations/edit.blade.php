@@ -14,7 +14,13 @@
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products/{{$attributeCombination->product->id}}">{{$attributeCombination->product->name}}</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Modify Combination</li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/combinations?id={{$attributeCombination->product->id}}">Combinations</a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/combinations/{{$attributeCombination->id}}">Prices</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Modify</li>
                 </ol>
             </nav>
 
@@ -49,7 +55,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="value" class="col-lg-12 control-label">Print, Run and Delivery <span class="text-danger">*</span></label>
+                                <label for="value" class="col-md-12 col-form-label text-md-left"><b>{{ __('Print, Run and Delivery') }} <span class="text-danger">*</span></b></label>
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="materialsTable" width="100%" cellspacing="0">

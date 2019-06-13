@@ -74,30 +74,6 @@
                             </div>
                         </form>
 
-
-
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="action" class="col-md-12 col-form-label text-md-left"><b>{{ __('Action') }}</b></label>--}}
-
-                            {{--<div class="offset-1 col-10">--}}
-                                {{--@if($attributeCombination != null)--}}
-                                    {{--<div class="offset-1 col-10">--}}
-                                        {{--<a href="/combinations/{{$attributeCombination->id}}/edit?ids={{$combination}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>--}}
-                                    {{--</div>--}}
-                                {{--@else--}}
-                                    {{--<div class="offset-1 col-10">--}}
-                                        {{--<a href="/combinations/create?ids={{$combination}}&id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create</a>--}}
-                                    {{--</div>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-
-                        {{--DELETE BUTTON--}}
-                        {{--<button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">--}}
-                        {{--<i class="fas fa-trash fa-sm fa-fw"></i>--}}
-                        {{--Delete--}}
-                        {{--</button>--}}
                         <div class="clearfix"></div>
                     </div>
 
@@ -110,6 +86,11 @@
 
     <script>
         $(document).ready(function () {
+
+            $('select').on('change', function() {
+                $('#action-holder').remove();
+            });
+
             $('#show').on('submit', function (e) {
                 e.preventDefault();
 
@@ -118,8 +99,10 @@
                     url: "/combinations/evaluate",
                     data: $('#show').serialize(),
                     success: function (response) {
+                        $('#action-holder').remove();
+
                         $('#show').after(
-                            "<div class=\"form-group row\">" +
+                            "<div id=\"action-holder\" class=\"form-group row\">" +
                                 "<label for=\"action\" class=\"col-md-12 col-form-label text-md-left\"><b>Action</b></label>" +
                                 "<div id=\"action\" class=\"offset-1 col-10\">" +
                                 "</div>" +
@@ -127,7 +110,8 @@
                         );
 
                         if (response.attributeCombinationID != null)
-                            $('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"/edit?ids="+response.combination+"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-pencil-alt\"></i> Modify</a>");
+                            $('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-eye\"></i> See Prices</a>");
+                            // $('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"/edit?ids="+response.combination+"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-eye\"></i> See Prices</a>");
                         else
                             $('#action').append("<a href=\"/combinations/create?ids="+response.combination+"&id={{$product->id}}\" class=\"btn btn-outline-primary\"><i class=\"fa fa-plus\"></i> Create</a>")
                     },

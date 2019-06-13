@@ -57,7 +57,15 @@ class CombinationController extends Controller
     }
 
     public function show($id) {
-        return view('pages.combinations.show')->with('attributeCombination', AttributeCombination::find($id));
+        $attributeCombination = AttributeCombination::find($id);
+        $childs = collect();
+
+        foreach (AttributeCombination::all() as $item)
+            if ($item->parent == $id) $childs->push($item);
+
+        return view('pages.combinations.show')
+            ->with('attributeCombination', $attributeCombination)
+            ->with('childs', $childs);
     }
 
     public function edit($id, Request $request) {
@@ -93,20 +101,16 @@ class CombinationController extends Controller
         return AttributeValue::find($id);
     }
 
-    public function testForm(Request $request) {
-        return view('pages.combinations.testForm')->with('product', Product::find($request->input('id')));
-    }
+//    public function testForm(Request $request) {
+//        return view('pages.combinations.testForm')->with('product', Product::find($request->input('id')));
+//    }
 
     public function evaluate(Request $request) {
         $attributeCombination = null;
-        $attributeValues = collect();
         $combination = $request->input('combinations')[0];
-        $attributeValues->push(AttributeValue::find($request->input('combinations')[0]));
 
-        for ($i = 1; $i < count($request->input('combinations')); $i++) {
+        for ($i = 1; $i < count($request->input('combinations')); $i++)
             $combination .= ',' . $request->input('combinations')[$i];
-            $attributeValues->push(AttributeValue::find($request->input('combinations')[$i]));
-        }
 
         foreach (AttributeCombination::all() as $item)
             if ($item->attribute_value_ids == $combination) $attributeCombination = $item->id;
@@ -117,11 +121,38 @@ class CombinationController extends Controller
         );
 
         return $data;
+    }
 
-//        return view('pages.combinations.result')
-//            ->with('product', Product::find($request->input('id')))
-//            ->with('attributeCombination', $attributeCombination)
-//            ->with('combination', $combination)
-//            ->with('attributeValues', $attributeValues);
+    public function copy(Request $request) {
+        $attributeCombination = null;
+        $isValid = true;
+
+        $combination = $request->input('combinations')[0];
+        for ($i = 1; $i < count($request->input('combinations')); $i++)
+            $combination .= ',' . $request->input('combinations')[$i];
+
+        foreach (AttributeCombination::all() as $item)
+            if ($combination == $item->attribute_value_ids) {
+                if ($item->parent == 0) $isValid = false;
+                else $attributeCombination = $item;
+
+                break;
+            }
+
+        if ($isValid) {
+            if ($attributeCombination == null) {
+                $attributeCombination = new AttributeCombination(array(
+                    'product_id' => $request->input('productID'),
+                    'attribute_value_ids' => $combination,
+                    'parent' => $request->get('attributeCombinationID')
+                ));
+            } else
+                $attributeCombination->parent = $request->get('attributeCombinationID');
+
+            $attributeCombination->save();
+        }
+
+
+
     }
 }
