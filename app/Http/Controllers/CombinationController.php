@@ -109,12 +109,19 @@ class CombinationController extends Controller
         }
 
         foreach (AttributeCombination::all() as $item)
-            if ($item->attribute_value_ids == $combination) $attributeCombination = $item;
+            if ($item->attribute_value_ids == $combination) $attributeCombination = $item->id;
 
-        return view('pages.combinations.result')
-            ->with('product', Product::find($request->input('id')))
-            ->with('attributeCombination', $attributeCombination)
-            ->with('combination', $combination)
-            ->with('attributeValues', $attributeValues);
+        $data = array(
+            'combination' => $combination,
+            'attributeCombinationID' => $attributeCombination
+        );
+
+        return $data;
+
+//        return view('pages.combinations.result')
+//            ->with('product', Product::find($request->input('id')))
+//            ->with('attributeCombination', $attributeCombination)
+//            ->with('combination', $combination)
+//            ->with('attributeValues', $attributeValues);
     }
 }

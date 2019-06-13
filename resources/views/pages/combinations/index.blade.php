@@ -47,7 +47,8 @@
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Attributes') }}</b></label>
                         </div>
 
-                        <form action="/combinations/evaluate" method="POST">
+                        {{--<form action="/combinations/evaluate" method="POST">--}}
+                        <form id="show">
                             @csrf
                             <input type="hidden" name="id" value="{{$product->id}}">
 
@@ -72,6 +73,26 @@
                                 </div>
                             </div>
                         </form>
+
+
+
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="action" class="col-md-12 col-form-label text-md-left"><b>{{ __('Action') }}</b></label>--}}
+
+                            {{--<div class="offset-1 col-10">--}}
+                                {{--@if($attributeCombination != null)--}}
+                                    {{--<div class="offset-1 col-10">--}}
+                                        {{--<a href="/combinations/{{$attributeCombination->id}}/edit?ids={{$combination}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>--}}
+                                    {{--</div>--}}
+                                {{--@else--}}
+                                    {{--<div class="offset-1 col-10">--}}
+                                        {{--<a href="/combinations/create?ids={{$combination}}&id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create</a>--}}
+                                    {{--</div>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+
                         {{--DELETE BUTTON--}}
                         {{--<button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">--}}
                         {{--<i class="fas fa-trash fa-sm fa-fw"></i>--}}
@@ -83,35 +104,39 @@
                 </div>
 
             </div>
-            <a href="/products" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/products/{{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 
-    {{--MODAL--}}
-    {{--<div class="modal fade" id="delUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
-    {{--<div class="modal-dialog" role="document">--}}
-    {{--<div class="modal-content">--}}
-    {{--<div class="modal-header">--}}
-    {{--<h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this product?</h5>--}}
-    {{--<button class="close" type="button" data-dismiss="modal" aria-label="Close">--}}
-    {{--<span aria-hidden="true">×</span>--}}
-    {{--</button>--}}
-    {{--</div>--}}
-    {{--<div class="modal-body">Select "Delete" below if you are sure on deleting this product.</div>--}}
-    {{--<div class="modal-footer">--}}
-    {{--<button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>--}}
+    <script>
+        $(document).ready(function () {
+            $('#show').on('submit', function (e) {
+                e.preventDefault();
 
-    {{--<form id="delete" method="POST" action="{{ action('ProductController@destroy', $product->id) }}" class="float-left">--}}
-    {{--<input type="hidden" name="_method" value="DELETE">--}}
-    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-    {{--<div>--}}
-    {{--<button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i> Delete</button>--}}
-    {{--</div>--}}
-    {{--</form>--}}
+                $.ajax({
+                    type: "POST",
+                    url: "/combinations/evaluate",
+                    data: $('#show').serialize(),
+                    success: function (response) {
+                        $('#show').after(
+                            "<div class=\"form-group row\">" +
+                                "<label for=\"action\" class=\"col-md-12 col-form-label text-md-left\"><b>Action</b></label>" +
+                                "<div id=\"action\" class=\"offset-1 col-10\">" +
+                                "</div>" +
+                            "</div>"
+                        );
 
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
+                        if (response.attributeCombinationID != null)
+                            $('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"/edit?ids="+response.combination+"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-pencil-alt\"></i> Modify</a>");
+                        else
+                            $('#action').append("<a href=\"/combinations/create?ids="+response.combination+"&id={{$product->id}}\" class=\"btn btn-outline-primary\"><i class=\"fa fa-plus\"></i> Create</a>")
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

@@ -23,7 +23,7 @@
 
             <div class="mt-5 col-lg-7 col-sm-8">
                 <div class="card shadow">
-                    <div class="card-header ">
+                    <div class="card-header">
                         <h5>Product's Combinations</h5>
                         <div class="clearfix"></div>
                     </div>
@@ -59,30 +59,32 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Print, Run & Delivery') }}</b></label>
+                        @if($attributeCombination != null)
+                            <div class="form-group row">
+                                <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Print, Run & Delivery') }}</b></label>
 
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                        <tr>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($attributeCombination->prices as $price)
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
                                             <tr>
-                                                <td>{{$price->quantity}}</td>
-                                                <td>{{$price->price}}</td>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($attributeCombination->prices as $price)
+                                                <tr>
+                                                    <td>{{$price->quantity}}</td>
+                                                    <td>{{$price->price}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="form-group row">
                             <label for="action" class="col-md-12 col-form-label text-md-left"><b>{{ __('Action') }}</b></label>
