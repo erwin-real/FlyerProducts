@@ -156,14 +156,34 @@ class CombinationController extends Controller
 
             return array(
                 "success" => true,
+                "id" => $attributeCombination->id,
                 "message" => "Copied Prices Successfully",
-                "combinations" => $attributeValues
+                "attributeValues" => $attributeValues
             );
         } else {
             return array(
                 "success" => false,
-                "message" => "Copied Prices Unsuccessfully. Please check the desired combinations thoroughly."
+                "message" => "Copied Prices Unsuccessfully. The desired combination is already a parent."
             );
         }
+    }
+
+    public function split(Request $request) {
+        $combination = AttributeCombination::find($request->input('combinationID'));
+        $parentCombination = AttributeCombination::find($request->input('parentCombinationID'));
+
+        $combination->parent = 0;
+        $combination->save();
+
+        foreach ($parentCombination->prices as $price) {
+            $newPrice = new Price(array(
+                'attribute_combination_id' => $combination->id,
+                'quantity' => $price->quantity,
+                'price' => $price->price
+            ));
+            $newPrice->save();
+        }
+
+        return $request;
     }
 }

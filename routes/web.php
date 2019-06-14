@@ -20,6 +20,7 @@ Route::get('/dashboard', 'DashboardController@index');
 //Route::get('/combinations/all', 'CombinationController@testForm');
 Route::post('/combinations/evaluate', 'CombinationController@evaluate');
 Route::post('/combinations/copy', 'CombinationController@copy');
+Route::post('/combinations/split', 'CombinationController@split');
 
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');

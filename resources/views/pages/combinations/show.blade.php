@@ -26,6 +26,7 @@
             <div class="container-fluid mt-5 col-lg-6 col-sm-7">
                 <div class="card shadow mb-4">
                     <div class="card-header">Combination Details</div>
+                    <input type="hidden" id="parentCombinationID" value="{{$attributeCombination->id}}">
 
                     <div class="card-body">
 
@@ -82,26 +83,31 @@
                                 <label for="value" class="col-md-12 col-form-label text-md-left"><b>{{ __('Childs') }}</b></label>
 
                                 <div class="table-responsive">
-                                    <table class="table table-hover text-center">
+                                    <table class="table table-hover text-center" id="childs">
                                         <thead>
-                                        <tr>
-                                            {{--<th>ID</th>--}}
-                                            @foreach($attributeCombination->product->attributes as $attribute)
-                                                @if($attribute->name != "Print, Run and Delivery")
-                                                    <th>{{$attribute->name}}</th>
-                                                @endif
-                                            @endforeach
-                                        </tr>
+                                            <tr>
+                                                {{--<th>ID</th>--}}
+                                                @foreach($attributeCombination->product->attributes as $attribute)
+                                                    @if($attribute->name != "Print, Run and Delivery")
+                                                        <th>{{$attribute->name}}</th>
+                                                    @endif
+                                                @endforeach
+                                                <th>Actions</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($childs as $child)
-                                            <tr>
-                                                {{--<td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>--}}
-                                                @foreach(explode(",",$child->attribute_value_ids) as $id)
-                                                    <td>{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</td>
-                                                @endforeach
-                                            </tr>
-                                        @endforeach
+                                            @foreach($childs as $child)
+                                                <tr id="{{$child->id}}">
+                                                    {{--<td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>--}}
+                                                    <td class="d-none"><input type="hidden" value="{{$child->id}}"></td>
+                                                    @foreach(explode(",",$child->attribute_value_ids) as $id)
+                                                        <td>{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</td>
+                                                    @endforeach
+                                                    <td>
+                                                        <button type="button" class="split-modal btn btn-outline-danger">Split</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -121,7 +127,8 @@
                                 @else
                                     <a href="/combinations/{{$attributeCombination->parent}}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> See Parent</a>
                                     <a href="/combinations/{{$attributeCombination->parent}}/edit?ids+{{\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->attribute_value_ids}}"
-                                       class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify Parent</a>
+                                       class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify Parent
+                                    </a>
                                 @endif
                             </div>
 
@@ -131,12 +138,12 @@
             </div>
 
 
-            <!-- Modal -->
+            <!-- COPY Modal -->
             <div class="modal fade" id="copy-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Copy Prices</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -165,7 +172,7 @@
 
                                 <div class="form-group mt-5 text-center">
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Copy</button>
+                                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-copy"></i> Copy</button>
                                     </div>
                                 </div>
                             </form>
@@ -176,6 +183,33 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- SPLIT Modal -->
+            <div class="modal fade" id="split-holder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Split Combination</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="split-modal-body">
+                            <div class="m-3 font-weight-bold">Do you really wish to split this combination from its parent?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Nope</button>
+
+                            <form id="split-form">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger">Sure</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <a href="/combinations?id={{$attributeCombination->product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
 
         </div>
@@ -183,7 +217,12 @@
 
     <script>
         $(document).ready(function () {
-            $('#show-modal').click(function (e) {
+            $('#show-modal').click(function () {
+                $('.alert-success').remove();
+                $('.alert-danger').remove();
+            });
+
+            $('#split-modal').click(function () {
                 $('.alert-success').remove();
                 $('.alert-danger').remove();
             });
@@ -198,25 +237,66 @@
                     success: function (response) {
                         $('#copy-form').modal('hide');
 
-                        if (response.success) $('#cue').before("<div class=\"alert alert-success\">"+ response.message +"</div>");
-                        else $('#cue').before("<div class=\"alert alert-danger\">"+ response.message +"</div>");
+                        if (response.success) {
+                            $('#cue').before("<div class=\"alert alert-success\">"+ response.message +"</div>");
+                            let temp = "<tr id=\""+ response.id +"\">";
+                            temp += "<td class=\"d-none\"><input type=\"hidden\" value=\""+ response.id +"\"></td>";
+                            for (let i = 0; i < response.attributeValues.length; i++)
+                                temp += "<td>"+ response.attributeValues[i].value +"</td>";
 
+                            temp += "<td><button type=\"button\" class=\"split-modal btn btn-outline-danger\">Split</button></td></tr>";
+                            $('#childs tr:last').after(temp);
 
+                        } else $('#cue').before("<div class=\"alert alert-danger\">"+ response.message +"</div>");
 
-                        {{--$('#action-holder').remove();--}}
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
 
-                        {{--$('#show').after(--}}
-                            {{--"<div id=\"action-holder\" class=\"form-group row\">" +--}}
-                            {{--"<label for=\"action\" class=\"col-md-12 col-form-label text-md-left\"><b>Action</b></label>" +--}}
-                            {{--"<div id=\"action\" class=\"offset-1 col-10\">" +--}}
-                            {{--"</div>" +--}}
-                            {{--"</div>"--}}
-                        {{--);--}}
+            $('.split-modal').click(function (e) {
+                $('#split-table').remove();
 
-                        {{--if (response.attributeCombinationID != null)--}}
-                            {{--$('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-eye\"></i> See Prices</a>");--}}
-                        {{--else--}}
-                            {{--$('#action').append("<a href=\"/combinations/create?ids="+response.combination+"&id={{$product->id}}\" class=\"btn btn-outline-primary\"><i class=\"fa fa-plus\"></i> Create</a>")--}}
+                let children = $(this).closest('td').parent()[0].children;
+                let table = "<table class=\"table table-hover text-center\" id=\"split-table\">";
+                let thead = "<thead><tr>";
+                let tbody = "<tbody><tr>";
+
+                @foreach($attributeCombination->product->attributes as $attribute)
+                    @if($attribute->name != "Print, Run and Delivery")
+                        thead += "<th>{{$attribute->name}}</th>";
+                    @endif
+                @endforeach
+
+                thead += "</tr></thead>";
+
+                for (let i = 0; i < children.length-2; i++)
+                    tbody += "<td>"+ children[i+1].innerText +"</td>";
+
+                tbody += "</tr></tbody>";
+                table += thead + tbody + "</table>";
+
+                $('#split-modal-body').append(table);
+                $('#split-form').append("<input type=\"hidden\" name=\"parentCombinationID\" value=\""+$('#parentCombinationID').val()+"\">\n" +
+                    "    <input type=\"hidden\" name=\"combinationID\" value=\""+ children[0].children[0].value +"\">");
+
+                $('#split-holder').modal('show');
+
+            });
+
+            $('#split-form').on('submit', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/combinations/split",
+                    data: $('#split-form').serialize(),
+                    success: function (response) {
+                        $('#split-holder').modal('hide');
+                        $('#cue').before("<div class=\"alert alert-success\">Split Successfully.</div>");
+                        $('#'+response.combinationID).remove();
                     },
                     error: function (error) {
                         console.log(error);
