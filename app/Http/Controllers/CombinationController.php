@@ -51,9 +51,9 @@ class CombinationController extends Controller
             $price->save();
         }
 
-        return redirect('/products/'. $product->id)
+        return redirect('/combinations/'. $attributeCombination->id)
             ->with('success', 'Added New Combination Successfully!')
-            ->with('product', $product);
+            ->with('attributeCombination', $attributeCombination);
     }
 
     public function show($id) {
@@ -88,7 +88,7 @@ class CombinationController extends Controller
             $price->save();
         }
 
-        return redirect('/products/'. $attributeCombination->product->id)
+        return redirect('/combinations/'. $attributeCombination->id)
             ->with('success', 'Modified Combination Successfully!')
             ->with('product', $attributeCombination->product);
     }
@@ -97,9 +97,8 @@ class CombinationController extends Controller
         //
     }
 
-    public static function findById($id) {
-        return AttributeValue::find($id);
-    }
+    public static function findAttributeValueById($id) { return AttributeValue::find($id); }
+    public static function findAttributeCombinationById($id) { return AttributeCombination::find($id); }
 
 //    public function testForm(Request $request) {
 //        return view('pages.combinations.testForm')->with('product', Product::find($request->input('id')));
@@ -150,9 +149,21 @@ class CombinationController extends Controller
                 $attributeCombination->parent = $request->get('attributeCombinationID');
 
             $attributeCombination->save();
+
+            $attributeValues = collect();
+            foreach (explode(',', $attributeCombination->attribute_value_ids) as $item)
+                $attributeValues->push(AttributeValue::find($item));
+
+            return array(
+                "success" => true,
+                "message" => "Copied Prices Successfully",
+                "combinations" => $attributeValues
+            );
+        } else {
+            return array(
+                "success" => false,
+                "message" => "Copied Prices Unsuccessfully. Please check the desired combinations thoroughly."
+            );
         }
-
-
-
     }
 }

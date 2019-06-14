@@ -5,7 +5,7 @@
     {{-- Right Content --}}
     <div class="body-right">
         <div class="container-fluid mb-5">
-            <h1 class="h2 mb-0 text-gray-800">Modify Combination</h1>
+            <h1 class="h2 mb-0 text-gray-800">Combination Details</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
@@ -17,7 +17,7 @@
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/combinations?id={{$attributeCombination->product->id}}">Combinations</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Prices</li>
+                    <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
             </nav>
 
@@ -25,7 +25,7 @@
 
             <div class="container-fluid mt-5 col-lg-6 col-sm-7">
                 <div class="card shadow mb-4">
-                    <div class="card-header">Modify Combination</div>
+                    <div class="card-header">Combination Details</div>
 
                     <div class="card-body">
 
@@ -36,8 +36,8 @@
                                 <ol>
                                     @foreach(explode(",",$attributeCombination->attribute_value_ids) as $id)
                                         <li>
-                                            <span class="font-weight-bold">{{\App\Http\Controllers\CombinationController::findById($id)->attribute->name}}</span><br />
-                                            <span class="ml-3">{{\App\Http\Controllers\CombinationController::findById($id)->value}}</span><br /><br />
+                                            <span class="font-weight-bold">{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->attribute->name}}</span><br />
+                                            <span class="ml-3">{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</span><br /><br />
                                         </li>
                                     @endforeach
                                 </ol>
@@ -56,56 +56,73 @@
                                     </tr>
                                     </thead>
                                     <tbody id="materialsBody">
-                                    @foreach($attributeCombination->prices as $price)
-                                        <tr>
-                                            <td>{{$price->quantity}}</td>
-                                            <td>{{$price->price}}</td>
-                                        </tr>
-                                    @endforeach
+                                    @if($attributeCombination->parent == 0)
+                                        @foreach($attributeCombination->prices as $price)
+                                            <tr>
+                                                <td>{{$price->quantity}}</td>
+                                                <td>{{$price->price}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        @foreach(\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->prices as $price)
+                                            <tr>
+                                                <td>{{$price->quantity}}</td>
+                                                <td>{{$price->price}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
 
                         </div>
 
-                        <div class="form-group row">
-                            <label for="value" class="col-md-12 col-form-label text-md-left"><b>{{ __('Childs') }}</b></label>
+                        @if($attributeCombination->parent == 0)
+                            <div class="form-group row">
+                                <label for="value" class="col-md-12 col-form-label text-md-left"><b>{{ __('Childs') }}</b></label>
 
-                            <div class="table-responsive">
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                    <tr>
-                                        {{--<th>ID</th>--}}
-                                        @foreach($attributeCombination->product->attributes as $attribute)
-                                            @if($attribute->name != "Print, Run and Delivery")
-                                                <th>{{$attribute->name}}</th>
-                                            @endif
-                                        @endforeach
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($childs as $child)
+                                <div class="table-responsive">
+                                    <table class="table table-hover text-center">
+                                        <thead>
                                         <tr>
-{{--                                            <td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>--}}
-                                            @foreach(explode(",",$child->attribute_value_ids) as $id)
-                                                <td>{{\App\Http\Controllers\CombinationController::findById($id)->value}}</td>
+                                            {{--<th>ID</th>--}}
+                                            @foreach($attributeCombination->product->attributes as $attribute)
+                                                @if($attribute->name != "Print, Run and Delivery")
+                                                    <th>{{$attribute->name}}</th>
+                                                @endif
                                             @endforeach
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($childs as $child)
+                                            <tr>
+                                                {{--<td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>--}}
+                                                @foreach(explode(",",$child->attribute_value_ids) as $id)
+                                                    <td>{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</td>
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
-                        </div>
+                        @endif
 
                         <div class="form-group row">
                             <label for="action" class="col-md-12 col-form-label text-md-left"><b>{{ __('Actions') }}</b></label>
                             <div class="offset-1 col-10">
-                                <a href="/combinations/{{$attributeCombination->id}}/edit?ids+{{$attributeCombination->attribute_value_ids}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
 
-                                <button id="show-modal" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#copy-form">
-                                    <i class="fa fa-copy"></i> Copy Prices
-                                </button>
+                                @if($attributeCombination->parent == 0)
+                                    <a href="/combinations/{{$attributeCombination->id}}/edit?ids+{{$attributeCombination->attribute_value_ids}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
+
+                                    <button id="show-modal" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#copy-form">
+                                        <i class="fa fa-copy"></i> Copy Prices
+                                    </button>
+                                @else
+                                    <a href="/combinations/{{$attributeCombination->parent}}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> See Parent</a>
+                                    <a href="/combinations/{{$attributeCombination->parent}}/edit?ids+{{\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->attribute_value_ids}}"
+                                       class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify Parent</a>
+                                @endif
                             </div>
 
                         </div>
@@ -159,7 +176,7 @@
                     </div>
                 </div>
             </div>
-
+            <a href="/combinations?id={{$attributeCombination->product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
 
         </div>
     </div>
@@ -168,6 +185,7 @@
         $(document).ready(function () {
             $('#show-modal').click(function (e) {
                 $('.alert-success').remove();
+                $('.alert-danger').remove();
             });
 
             $('#copy').on('submit', function (e) {
@@ -180,7 +198,11 @@
                     success: function (response) {
                         $('#copy-form').modal('hide');
 
-                        $('#cue').before("<div class=\"alert alert-success\">Copied Prices Successfully!</div>");
+                        if (response.success) $('#cue').before("<div class=\"alert alert-success\">"+ response.message +"</div>");
+                        else $('#cue').before("<div class=\"alert alert-danger\">"+ response.message +"</div>");
+
+
+
                         {{--$('#action-holder').remove();--}}
 
                         {{--$('#show').after(--}}

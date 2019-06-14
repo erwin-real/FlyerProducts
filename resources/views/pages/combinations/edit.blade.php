@@ -18,7 +18,7 @@
                         <a href="/combinations?id={{$attributeCombination->product->id}}">Combinations</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/combinations/{{$attributeCombination->id}}">Prices</a>
+                        <a href="/combinations/{{$attributeCombination->id}}">Details</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Modify</li>
                 </ol>
@@ -46,8 +46,8 @@
                                     <ol>
                                         @foreach(explode(",",$attributeCombination->attribute_value_ids) as $id)
                                             <li>
-                                                <span class="font-weight-bold">{{\App\Http\Controllers\CombinationController::findById($id)->attribute->name}}</span><br />
-                                                <span class="ml-3">{{\App\Http\Controllers\CombinationController::findById($id)->value}}</span><br /><br />
+                                                <span class="font-weight-bold">{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->attribute->name}}</span><br />
+                                                <span class="ml-3">{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</span><br /><br />
                                             </li>
                                         @endforeach
                                     </ol>
@@ -94,6 +94,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="/combinations/{{$attributeCombination->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 
