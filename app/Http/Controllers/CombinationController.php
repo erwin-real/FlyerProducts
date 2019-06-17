@@ -132,10 +132,12 @@ class CombinationController extends Controller
 
         foreach (AttributeCombination::all() as $item)
             if ($combination == $item->attribute_value_ids) {
-                if ($item->parent == 0) $isValid = false;
-                else $attributeCombination = $item;
-
+                $isValid = false;
                 break;
+//                if ($item->parent == 0 || ) $isValid = false;
+//                else $attributeCombination = $item;
+//
+//                break;
             }
 
         if ($isValid) {
@@ -163,7 +165,7 @@ class CombinationController extends Controller
         } else {
             return array(
                 "success" => false,
-                "message" => "Copied Prices Unsuccessfully. The desired combination is already a parent."
+                "message" => "Copied Prices Unsuccessfully. The desired combination is already a parent/child."
             );
         }
     }
