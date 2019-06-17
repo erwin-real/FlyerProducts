@@ -104,7 +104,7 @@
                                                         <td>{{\App\Http\Controllers\CombinationController::findAttributeValueById($id)->value}}</td>
                                                     @endforeach
                                                     <td>
-                                                        <button type="button" class="split-modal btn btn-outline-danger">Split</button>
+                                                        <button type="button" class="split-modal btn btn-outline-danger"><i class="fa fa-exclamation-triangle"></i> Split</button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -129,6 +129,7 @@
                                     <a href="/combinations/{{$attributeCombination->parent}}/edit?ids+{{\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->attribute_value_ids}}"
                                        class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify Parent
                                     </a>
+                                    <button type="button" class="split-modal-single btn btn-outline-danger"><i class="fa fa-exclamation-triangle"></i> Split</button>
                                 @endif
                             </div>
 
@@ -210,6 +211,34 @@
                 </div>
             </div>
 
+
+            <!-- SPLIT SINGLE Modal -->
+            <div class="modal fade" id="split-holder-single" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Split Combination</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="split-modal-body">
+                            <div class="m-3 font-weight-bold">Do you really wish to split this combination from its parent?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Nope</button>
+
+                            <form action="{{ action('CombinationController@splitSingle') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="parentID" value="{{$attributeCombination->parent}}">
+                                <input type="hidden" name="combinationID" value="{{$attributeCombination->id}}">
+                                <button type="submit" class="btn btn-outline-danger">Sure</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <a href="/combinations?id={{$attributeCombination->product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
 
         </div>
@@ -265,12 +294,12 @@
                 let tbody = "<tbody><tr>";
 
                 @foreach($attributeCombination->product->attributes as $attribute)
-                    @if($attribute->name != "Print, Run and Delivery")
-                        thead += "<th>{{$attribute->name}}</th>";
-                    @endif
-                @endforeach
+                        @if($attribute->name != "Print, Run and Delivery")
+                    thead += "<th>{{$attribute->name}}</th>";
+                @endif
+                        @endforeach
 
-                thead += "</tr></thead>";
+                    thead += "</tr></thead>";
 
                 for (let i = 0; i < children.length-2; i++)
                     tbody += "<td>"+ children[i+1].innerText +"</td>";
@@ -302,6 +331,10 @@
                         console.log(error);
                     }
                 });
+            });
+
+            $('.split-modal-single').click(function (e) {
+                $('#split-holder-single').modal('show');
             });
         });
     </script>

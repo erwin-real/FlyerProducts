@@ -186,4 +186,31 @@ class CombinationController extends Controller
 
         return $request;
     }
+
+    public function splitSingle(Request $request) {
+        $combination = AttributeCombination::find($request->input('combinationID'));
+        $parent = AttributeCombination::find($request->input('parentID'));
+
+        $combination->parent = 0;
+        $combination->save();
+
+        foreach ($parent->prices as $price) {
+            $newPrice = new Price(array(
+                'attribute_combination_id' => $combination->id,
+                'quantity' => $price->quantity,
+                'price' => $price->price
+            ));
+            $newPrice->save();
+        }
+
+        $childs = collect();
+
+        foreach (AttributeCombination::all() as $item) if ($item->parent == $combination->id) $childs->push($item);
+
+        return redirect('/combinations/'. $combination->id)
+            ->with('attributeCombination', $combination)
+            ->with('success', "Split Combination Successfully!")
+            ->with('childs', $childs);
+
+    }
 }
