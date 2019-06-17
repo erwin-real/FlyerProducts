@@ -5,19 +5,22 @@
     {{-- Right Content --}}
     <div class="body-right">
         <div class="container-fluid mb-5">
-            <h1 class="h2 mb-0 text-gray-800">Add Attribute Value</h1>
+            <h1 class="h2 mb-0 text-gray-800">Update Attribute Value</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/products/{{$attribute->product->id}}">{{$attribute->product->name}}</a>
+                        <a href="/products/{{$attributeValue->attribute->product->id}}">{{$attributeValue->attribute->product->name}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/attributes?id={{$attribute->id}}">Attribute: {{$attribute->name}}</a>
+                        <a href="/attributes?id={{$attributeValue->attribute->id}}">Attribute: {{$attributeValue->attribute->name}}</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Attribute Value</li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="/attributes/{{$attributeValue->id}}">{{$attributeValue->id}}</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Update</li>
                 </ol>
             </nav>
 
@@ -25,19 +28,20 @@
 
             <div class="container-fluid mt-5 col-lg-6 col-sm-7">
                 <div class="card shadow mb-4">
-                    <div class="card-header">Add Attribute Value</div>
+                    <div class="card-header">Update Attribute Value</div>
 
                     <div class="card-body">
 
-                        <form action="{{ action('AttributeController@store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ action('AttributeController@update', $attributeValue->id) }}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="_method" value="PUT">
                             @csrf
-                            <input type="hidden" name="id" value="{{$attribute->id}}">
+                            <input type="hidden" name="id" value="{{$attributeValue->id}}">
 
                             <div class="form-group row">
                                 <label for="value" class="col-md-12 col-form-label text-md-left">Attribute Value <span class="text-danger">*</span></label>
 
                                 <div class="col-md-12">
-                                    <input id="value" type="text" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" required autofocus>
+                                    <input id="value" type="text" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" required autofocus value="{{$attributeValue->value}}">
 
                                     @if ($errors->has('value'))
                                         <span class="invalid-feedback" role="alert">
@@ -51,7 +55,7 @@
                                 <label for="details" class="col-md-12 col-form-label text-md-left">Attribute Value Details</label>
 
                                 <div class="col-md-12">
-                                    <textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus></textarea>
+                                    <textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus>{{$attributeValue->details}}</textarea>
                                     @if ($errors->has('details'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('details') }}</strong>
@@ -85,6 +89,8 @@
                     </div>
                 </div>
             </div>
+
+            <a href="/attributes/{{$attributeValue->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 @endsection

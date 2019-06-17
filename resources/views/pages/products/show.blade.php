@@ -47,7 +47,7 @@
                                 <ol>
                                     @foreach($product->attributes as $attribute)
                                         @if($attribute->name != "Print, Run and Delivery")
-                                            <li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>
+                                            <li><a href="/attributes?id={{$attribute->id}}">{{$attribute->name}}</a></li>
                                             {{--<li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
                                         @endif
                                     @endforeach

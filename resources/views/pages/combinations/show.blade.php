@@ -79,7 +79,7 @@
                         </div>
 
                         @if($attributeCombination->parent == 0)
-                            <div class="form-group row">
+                            <div class="form-group row" id="childs-holder">
                                 <label for="value" class="col-md-12 col-form-label text-md-left"><b>{{ __('Childs') }}</b></label>
 
                                 <div class="table-responsive">
@@ -95,7 +95,7 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="childs-body">
                                             @foreach($childs as $child)
                                                 <tr id="{{$child->id}}">
                                                     {{--<td><a href="/combinations/{{$attributeCombination->id}}">{{$attributeCombination->id}}</a></td>--}}
@@ -276,6 +276,8 @@
                             temp += "<td><button type=\"button\" class=\"split-modal btn btn-outline-danger\">Split</button></td></tr>";
                             $('#childs tr:last').after(temp);
 
+                            location.reload();
+
                         } else $('#cue').before("<div class=\"alert alert-danger\">"+ response.message +"</div>");
 
                     },
@@ -294,10 +296,10 @@
                 let tbody = "<tbody><tr>";
 
                 @foreach($attributeCombination->product->attributes as $attribute)
-                        @if($attribute->name != "Print, Run and Delivery")
-                    thead += "<th>{{$attribute->name}}</th>";
-                @endif
-                        @endforeach
+                    @if($attribute->name != "Print, Run and Delivery")
+                        thead += "<th>{{$attribute->name}}</th>";
+                    @endif
+                @endforeach
 
                     thead += "</tr></thead>";
 
