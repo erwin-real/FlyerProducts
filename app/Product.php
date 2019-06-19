@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
+    protected $connection = 'mysql2';
+
     public $timestamps = true;
 
     protected $fillable = [

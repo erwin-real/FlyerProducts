@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AttributeValue extends Model
 {
+    protected $connection = 'mysql';
+
     public $timestamps = false;
 
     protected $fillable = [
