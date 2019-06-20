@@ -9,11 +9,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/products">Products</a>
+                        <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/products/{{$product->id}}">{{$product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Combinations</li>
                 </ol>
@@ -92,11 +92,11 @@
                             <div class="offset-1 col-10">
                                 @if($attributeCombination != null)
                                     <div class="offset-1 col-10">
-                                        <a href="/combinations/{{$attributeCombination->id}}/edit?ids={{$combination}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
+                                        <a href="/flyerproducts/public/combinations/{{$attributeCombination->id}}/edit?ids={{$combination}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
                                     </div>
                                 @else
                                     <div class="offset-1 col-10">
-                                        <a href="/combinations/create?ids={{$combination}}&id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create</a>
+                                        <a href="/flyerproducts/public/combinations/create?ids={{$combination}}&id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Create</a>
                                     </div>
                                 @endif
                             </div>
@@ -108,7 +108,7 @@
                 </div>
 
             </div>
-            <a href="/products" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/public/products" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 

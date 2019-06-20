@@ -43,7 +43,7 @@
                                     <tbody>
                                         @foreach($products as $product)
                                             <tr>
-                                                <td><a href="/products/{{$product->id}}">{{$product->name}}</a></td>
+                                                <td><a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a></td>
                                                 <td>{{ $product->details }}</td>
                                                 <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
                                                 <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>

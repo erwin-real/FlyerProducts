@@ -9,7 +9,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/products">Products</a>
+                        <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                 </ol>
@@ -47,7 +47,7 @@
                                 <ol>
                                     @foreach($product->attributes as $attribute)
                                         @if($attribute->name != "Print, Run and Delivery")
-                                            <li><a href="/attributes?id={{$attribute->id}}">{{$attribute->name}}</a></li>
+                                            <li><a href="/flyerproducts/public/attributes?id={{$attribute->id}}">{{$attribute->name}}</a></li>
                                             {{--<li><a href="/attributes/{{$attribute->id}}">{{$attribute->name}}</a></li>--}}
                                         @endif
                                     @endforeach
@@ -58,7 +58,7 @@
 
                         <div class="w-100 text-center">
 {{--                            <a href="/combinations/all?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
-                            <a href="/combinations?id={{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
+                            <a href="/flyerproducts/public/combinations?id={{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
                             {{--<a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
                             <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
                         </div>
@@ -74,7 +74,7 @@
                 </div>
 
             </div>
-            <a href="/products" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/public/products" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 
