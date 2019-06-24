@@ -40,18 +40,18 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="details" class="col-md-12 col-form-label text-md-left">Product Details <span class="text-danger">*</span></label>
+                            {{--<div class="form-group row">--}}
+                                {{--<label for="details" class="col-md-12 col-form-label text-md-left">Product Details <span class="text-danger">*</span></label>--}}
 
-                                <div class="col-md-12">
-                                    <textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus></textarea>
-                                    @if ($errors->has('details'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('details') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                                {{--<div class="col-md-12">--}}
+                                    {{--<textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus></textarea>--}}
+                                    {{--@if ($errors->has('details'))--}}
+                                        {{--<span class="invalid-feedback" role="alert">--}}
+                                        {{--<strong>{{ $errors->first('details') }}</strong>--}}
+                                    {{--</span>--}}
+                                    {{--@endif--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="form-group row mb-0 text-center">
                                 <div class="col-md-12">

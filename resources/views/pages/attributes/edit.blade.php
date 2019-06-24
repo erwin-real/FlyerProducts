@@ -12,7 +12,7 @@
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeValue->attribute->product->id}}">{{$attributeValue->attribute->product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$attributeValue->attribute->product->entity_id}}">{{$attributeValue->attribute->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/flyerproducts/public/attributes?id={{$attributeValue->attribute->id}}">Attribute: {{$attributeValue->attribute->name}}</a>

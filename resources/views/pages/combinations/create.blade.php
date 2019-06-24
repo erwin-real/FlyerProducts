@@ -12,7 +12,7 @@
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$product->entity_id}}">{{$product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Create Combination</li>
                 </ol>
@@ -28,7 +28,7 @@
 
                         <form action="/flyerproducts/public/combinations" method="POST">
                             @csrf
-                            <input type="hidden" name="id" value="{{$product->id}}">
+                            <input type="hidden" name="id" value="{{$product->entity_id}}">
                             <input type="hidden" name="ids" value="{{$ids}}">
 
 

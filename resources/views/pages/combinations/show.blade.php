@@ -12,10 +12,10 @@
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->id}}">{{$attributeCombination->product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->id}}">Combinations</a>
+                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
@@ -155,7 +155,7 @@
                                 @csrf
 
                                 <input type="hidden" name="attributeCombinationID" value="{{$attributeCombination->id}}">
-                                <input type="hidden" name="productID" value="{{$attributeCombination->product->id}}">
+                                <input type="hidden" name="productID" value="{{$attributeCombination->product->entity_id}}">
                                 @foreach($attributeCombination->product->attributes as $attribute)
                                     @if($attribute->name != "Print, Run and Delivery")
                                         <div class="form-group">
@@ -239,7 +239,7 @@
                 </div>
             </div>
 
-            <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
 
         </div>
     </div>

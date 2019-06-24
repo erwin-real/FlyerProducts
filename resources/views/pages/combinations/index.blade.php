@@ -5,14 +5,14 @@
     {{-- Right Content --}}
     <div class="body-right">
         <div class="container-fluid mb-5">
-            <h1 class="h2 mb-0 text-gray-800">{{$product->name}}</h1>
+            <h1 class="h2 mb-0 text-gray-800">{{$product->sku}}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$product->entity_id}}">{{$product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Combinations</li>
                 </ol>
@@ -31,17 +31,17 @@
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product Name') }}</b></label>
 
                             <div class="offset-1 col-10">
-                                <span id="name">{{$product->name}}</span>
+                                <span id="name">{{$product->sku}}</span>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product\'s Details') }}</b></label>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product\'s Details') }}</b></label>--}}
 
-                            <div class="offset-1 col-10">
-                                <span id="name">{{$product->details}}</span>
-                            </div>
-                        </div>
+                            {{--<div class="offset-1 col-10">--}}
+                                {{--<span id="name">{{$product->details}}</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group row">
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Attributes') }}</b></label>
@@ -50,7 +50,7 @@
                         {{--<form action="/combinations/evaluate" method="POST">--}}
                         <form id="show">
                             @csrf
-                            <input type="hidden" name="id" value="{{$product->id}}">
+                            <input type="hidden" name="id" value="{{$product->entity_id}}">
 
                             @foreach($product->attributes as $attribute)
                                 @if($attribute->name != "Print, Run and Delivery")
@@ -80,7 +80,7 @@
                 </div>
 
             </div>
-            <a href="/flyerproducts/public/products/{{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/public/products/{{$product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 
@@ -113,7 +113,7 @@
                             $('#action').append("<a href=\"/flyerproducts/public/combinations/"+ response.attributeCombinationID +"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-eye\"></i> See Prices and Details</a>");
                             // $('#action').append("<a href=\"/combinations/"+ response.attributeCombinationID +"/edit?ids="+response.combination+"\" class=\"btn btn-outline-primary\"><i class=\"fa fa-eye\"></i> See Prices</a>");
                         else
-                            $('#action').append("<a href=\"/flyerproducts/public/combinations/create?ids="+response.combination+"&id={{$product->id}}\" class=\"btn btn-outline-primary\"><i class=\"fa fa-plus\"></i> Create</a>")
+                            $('#action').append("<a href=\"/flyerproducts/public/combinations/create?ids="+response.combination+"&id={{$product->entity_id}}\" class=\"btn btn-outline-primary\"><i class=\"fa fa-plus\"></i> Create</a>")
                     },
                     error: function (error) {
                         console.log(error);

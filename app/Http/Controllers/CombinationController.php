@@ -35,7 +35,7 @@ class CombinationController extends Controller
         $product = Product::find($request->get('id'));
 
         $attributeCombination = new AttributeCombination(array(
-            'product_id' => $product->id,
+            'product_entity_id' => $product->entity_id,
             'attribute_value_ids' => $request->get('ids'),
             'parent' => 0
         ));
@@ -143,7 +143,7 @@ class CombinationController extends Controller
         if ($isValid) {
             if ($attributeCombination == null) {
                 $attributeCombination = new AttributeCombination(array(
-                    'product_id' => $request->input('productID'),
+                    'product_entity_id' => $request->input('productID'),
                     'attribute_value_ids' => $combination,
                     'parent' => $request->get('attributeCombinationID')
                 ));

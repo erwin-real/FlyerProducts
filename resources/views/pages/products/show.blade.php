@@ -5,13 +5,13 @@
     {{-- Right Content --}}
     <div class="body-right">
         <div class="container-fluid mb-5">
-            <h1 class="h2 mb-0 text-gray-800">{{$product->name}}</h1>
+            <h1 class="h2 mb-0 text-gray-800">{{$product->sku}}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$product->sku}}</li>
                 </ol>
             </nav>
 
@@ -28,17 +28,17 @@
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product Name') }}</b></label>
 
                             <div class="offset-1 col-10">
-                                <span id="name">{{$product->name}}</span>
+                                <span id="name">{{$product->sku}}</span>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product\'s Details') }}</b></label>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Product\'s Details') }}</b></label>--}}
 
-                            <div class="offset-1 col-10">
-                                <span id="name">{{$product->details}}</span>
-                            </div>
-                        </div>
+                            {{--<div class="offset-1 col-10">--}}
+                                {{--<span id="name">{{$product->details}}</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group row">
                             <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Attributes') }}</b></label>
@@ -57,10 +57,10 @@
                         </div>
 
                         <div class="w-100 text-center">
-{{--                            <a href="/combinations/all?id={{$product->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
-                            <a href="/flyerproducts/public/combinations?id={{$product->id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
+{{--                            <a href="/combinations/all?id={{$product->entity_id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
+                            <a href="/flyerproducts/public/combinations?id={{$product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />
                             {{--<a href="{{ action('CombinationController@index', $product) }}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
-                            <a href="{{ action('ProductController@edit', $product->id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
+                            <a href="{{ action('ProductController@edit', $product->entity_id) }}" class="btn btn-outline-info mt-3"><i class="fa fa-pencil-alt"></i> Update Product info & attributes</a>
                         </div>
 
                         {{--DELETE BUTTON--}}
@@ -92,7 +92,7 @@
     {{--<div class="modal-footer">--}}
     {{--<button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>--}}
 
-    {{--<form id="delete" method="POST" action="{{ action('ProductController@destroy', $product->id) }}" class="float-left">--}}
+    {{--<form id="delete" method="POST" action="{{ action('ProductController@destroy', $product->entity_id) }}" class="float-left">--}}
     {{--<input type="hidden" name="_method" value="DELETE">--}}
     {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
     {{--<div>--}}

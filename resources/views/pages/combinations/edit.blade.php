@@ -12,10 +12,10 @@
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->id}}">{{$attributeCombination->product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->id}}">Combinations</a>
+                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
                         <a href="/flyerproducts/public/combinations/{{$attributeCombination->id}}">Details</a>
@@ -35,7 +35,7 @@
                         <form action="{{ action('CombinationController@update', $attributeCombination->id) }}" method="POST">
                             <input type="hidden" name="_method" value="PUT">
                             @csrf
-                            <input type="hidden" name="id" value="{{$attributeCombination->product->id}}">
+                            <input type="hidden" name="id" value="{{$attributeCombination->product->entity_id}}">
                             <input type="hidden" name="ids" value="{{$ids}}">
 
 

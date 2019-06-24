@@ -27,13 +27,13 @@ class ProductController extends Controller
         ]);
 
         $product = new Product(array(
-            'name' => $validatedData['name'],
-            'details' => $request->get('details')
+            'name' => $validatedData['name']
+//            'details' => $request->get('details')
         ));
 
         $product->save();
 
-        return redirect('/products/'. $product->id)
+        return redirect('/products/'. $product->entity_id)
             ->with('success', 'Added New Product Successfully!')
             ->with('product', $product);
     }
@@ -50,8 +50,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product) {
         $validatedData = $request->validate([ 'name' => 'required' ]);
 
-        $product->name = $validatedData['name'];
-        $product->details = $request->get('details');
+        $product->sku = $validatedData['name'];
+//        $product->details = $request->get('details');
 
         $product->save();
 
@@ -59,22 +59,24 @@ class ProductController extends Controller
 
         for ($i = 0; $i < count($request->get('attribute')); $i++) {
             $attribute = new Attribute(array(
-                'product_id' => $product->id,
+                'product_entity_id' => $product->entity_id,
                 'name' => $request->get('attribute')[$i],
                 'order' => $i+1
             ));
 
+            $attribute->product_entity_id = $product->entity_id;
             $attribute->save();
         }
         $attribute = new Attribute(array(
-            'product_id' => $product->id,
+            'product_entity_id' => $product->entity_id,
             'name' => 'Print, Run and Delivery',
             'order' => count($request->get('attribute'))+1
         ));
 
+        $attribute->product_entity_id = $product->entity_id;
         $attribute->save();
 
-        return redirect('/products/'. $product->id)
+        return redirect('/products/'. $product->entity_id)
             ->with('success', 'Updated Product Successfully!')
             ->with('product', $product);
     }

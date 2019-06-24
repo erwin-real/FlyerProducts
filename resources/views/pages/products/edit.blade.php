@@ -12,7 +12,7 @@
                         <a href="/flyerproducts/public/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a>
+                        <a href="/flyerproducts/public/products/{{$product->entity_id}}">{{$product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Update Product info & attributes</li>
                 </ol>
@@ -26,7 +26,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{ action('ProductController@update', $product->id) }}" method="POST">
+                        <form action="{{ action('ProductController@update', $product->entity_id) }}" method="POST">
                             <input type="hidden" name="_method" value="PUT">
                             @csrf
 
@@ -34,7 +34,7 @@
                                 <label for="name" class="col-md-12 col-form-label text-md-left">{{ __('Product Name') }} <span class="text-danger">*</span></label>
 
                                 <div class="col-md-12">
-                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$product->name}}" required autofocus>
+                                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$product->sku}}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,18 +44,18 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="details" class="col-md-12 col-form-label text-md-left">Product Details <span class="text-danger">*</span></label>
+                            {{--<div class="form-group row">--}}
+                                {{--<label for="details" class="col-md-12 col-form-label text-md-left">Product Details <span class="text-danger">*</span></label>--}}
 
-                                <div class="col-md-12">
-                                    <textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus>{{$product->details}}</textarea>
-                                    @if ($errors->has('details'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('details') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                                {{--<div class="col-md-12">--}}
+                                    {{--<textarea class="form-control {{ $errors->has('details') ? ' is-invalid' : '' }}" rows="3" id="details" name="details" autofocus>{{$product->details}}</textarea>--}}
+                                    {{--@if ($errors->has('details'))--}}
+                                        {{--<span class="invalid-feedback" role="alert">--}}
+                                        {{--<strong>{{ $errors->first('details') }}</strong>--}}
+                                    {{--</span>--}}
+                                    {{--@endif--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="form-group row">
                                 <label for="attributes[]" class="col-md-12 col-form-label text-md-left">{{ __('Product\'s Attributes') }} <span class="text-danger">*</span></label>

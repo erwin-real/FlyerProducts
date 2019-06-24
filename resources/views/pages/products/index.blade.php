@@ -34,7 +34,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Details</th>
+                                            {{--<th>Details</th>--}}
                                             <th>Date Added</th>
                                             <th>Date Modified</th>
                                             {{--<th>Actions</th>--}}
@@ -43,8 +43,8 @@
                                     <tbody>
                                         @foreach($products as $product)
                                             <tr>
-                                                <td><a href="/flyerproducts/public/products/{{$product->id}}">{{$product->name}}</a></td>
-                                                <td>{{ $product->details }}</td>
+                                                <td><a href="/flyerproducts/public/products/{{$product->entity_id}}">{{$product->sku}}</a></td>
+{{--                                                <td>{{ $product->details }}</td>--}}
                                                 <td>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</td>
                                                 <td>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</td>
                                                 {{--<td>--}}
