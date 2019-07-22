@@ -3,7 +3,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center my-3" href="/flyerproducts/public/dashboard">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center my-3" href="/flyerproducts/dashboard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-paper-plane"></i>
             <div class="sidebar-brand-text"> Flyer</div>
@@ -15,14 +15,14 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ request()->is('dashboard') ? 'active border-left-info' : '' }}">
-        <a class="nav-link" href="/flyerproducts/public/dashboard">
+        <a class="nav-link" href="/flyerproducts/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item {{ request()->is('products') || request()->is('products/*')
         || request()->is('attributes') || request()->is('attributes/*')
         || request()->is('combinations') || request()->is('combinations/*') ? 'active border-left-info' : '' }}">
-        <a class="nav-link" href="/flyerproducts/public/products">
+        <a class="nav-link" href="/flyerproducts/products">
             <i class="fas fa-fw fa-puzzle-piece"></i>
             <span>Products</span></a>
     </li>

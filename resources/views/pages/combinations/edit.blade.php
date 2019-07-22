@@ -9,16 +9,16 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products">Products</a>
+                        <a href="/flyerproducts/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
+                        <a href="/flyerproducts/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
+                        <a href="/flyerproducts/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/combinations/{{$attributeCombination->id}}">Details</a>
+                        <a href="/flyerproducts/combinations/{{$attributeCombination->id}}">Details</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Modify</li>
                 </ol>
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <a href="/flyerproducts/public/combinations/{{$attributeCombination->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/combinations/{{$attributeCombination->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 

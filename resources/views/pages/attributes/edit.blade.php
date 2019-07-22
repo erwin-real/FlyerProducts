@@ -9,16 +9,16 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products">Products</a>
+                        <a href="/flyerproducts/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeValue->attribute->product->entity_id}}">{{$attributeValue->attribute->product->sku}}</a>
+                        <a href="/flyerproducts/products/{{$attributeValue->attribute->product->entity_id}}">{{$attributeValue->attribute->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/attributes?id={{$attributeValue->attribute->id}}">Attribute: {{$attributeValue->attribute->name}}</a>
+                        <a href="/flyerproducts/attributes?id={{$attributeValue->attribute->id}}">Attribute: {{$attributeValue->attribute->name}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/attributes/{{$attributeValue->id}}">{{$attributeValue->id}}</a>
+                        <a href="/flyerproducts/attributes/{{$attributeValue->id}}">{{$attributeValue->id}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Update</li>
                 </ol>
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <a href="/flyerproducts/public/attributes/{{$attributeValue->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/attributes/{{$attributeValue->id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
         </div>
     </div>
 @endsection

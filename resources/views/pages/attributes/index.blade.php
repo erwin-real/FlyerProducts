@@ -9,10 +9,10 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item" aria-current="page">
-                    <a href="/flyerproducts/public/products">Products</a>
+                    <a href="/flyerproducts/products">Products</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">
-                    <a href="/flyerproducts/public/products/{{$attribute->product->entity_id}}">{{$attribute->product->sku}}</a>
+                    <a href="/flyerproducts/products/{{$attribute->product->entity_id}}">{{$attribute->product->sku}}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Attribute: {{$attribute->name}}</li>
             </ol>
@@ -26,7 +26,7 @@
                 <div class="card shadow">
                     <div class="card-header">
                         <h5 class="float-left">Attribute Values</h5>
-                        <a href="/flyerproducts/public/attributes/create?id={{$attribute->id}}" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Value</a>
+                        <a href="/flyerproducts/attributes/create?id={{$attribute->id}}" class="btn btn-outline-primary float-right"><i class="fas fa-plus"></i> Add Value</a>
                         <div class="clearfix"></div>
                     </div>
 
@@ -48,11 +48,11 @@
                                     <tbody>
                                     @foreach($attribute->attributeValues as $attributeValue)
                                         <tr>
-                                            <td class="align-middle"><a href="/flyerproducts/public/attributes/{{$attributeValue->id}}">{{ $attributeValue->id }}</a></td>
+                                            <td class="align-middle"><a href="/flyerproducts/attributes/{{$attributeValue->id}}">{{ $attributeValue->id }}</a></td>
                                             <td class="align-middle">{{ $attributeValue->value }}</td>
                                             <td class="align-middle">{{ $attributeValue->details }}</td>
                                             <td class="align-middle">
-                                                <img src="/flyerproducts/public/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100%;" />
+                                                <img src="/flyerproducts/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100%;" />
                                             </td>
                                         </tr>
                                     @endforeach

@@ -9,10 +9,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products">Products</a>
+                        <a href="/flyerproducts/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$product->entity_id}}">{{$product->sku}}</a>
+                        <a href="/flyerproducts/products/{{$product->entity_id}}">{{$product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Create Combination</li>
                 </ol>
@@ -26,7 +26,7 @@
 
                     <div class="card-body">
 
-                        <form action="/flyerproducts/public/combinations" method="POST">
+                        <form action="/flyerproducts/combinations" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{$product->entity_id}}">
                             <input type="hidden" name="ids" value="{{$ids}}">

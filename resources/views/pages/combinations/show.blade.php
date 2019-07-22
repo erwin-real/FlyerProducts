@@ -9,13 +9,13 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products">Products</a>
+                        <a href="/flyerproducts/products">Products</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
+                        <a href="/flyerproducts/products/{{$attributeCombination->product->entity_id}}">{{$attributeCombination->product->sku}}</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
+                        <a href="/flyerproducts/combinations?id={{$attributeCombination->product->entity_id}}">Combinations</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
@@ -119,14 +119,14 @@
                             <div class="offset-1 col-10">
 
                                 @if($attributeCombination->parent == 0)
-                                    <a href="/flyerproducts/public/combinations/{{$attributeCombination->id}}/edit?ids+{{$attributeCombination->attribute_value_ids}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
+                                    <a href="/flyerproducts/combinations/{{$attributeCombination->id}}/edit?ids+{{$attributeCombination->attribute_value_ids}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify</a>
 
                                     <button id="show-modal" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#copy-form">
                                         <i class="fa fa-copy"></i> Copy Prices
                                     </button>
                                 @else
-                                    <a href="/flyerproducts/public/combinations/{{$attributeCombination->parent}}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> See Parent</a>
-                                    <a href="/flyerproducts/public/combinations/{{$attributeCombination->parent}}/edit?ids+{{\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->attribute_value_ids}}"
+                                    <a href="/flyerproducts/combinations/{{$attributeCombination->parent}}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> See Parent</a>
+                                    <a href="/flyerproducts/combinations/{{$attributeCombination->parent}}/edit?ids+{{\App\Http\Controllers\CombinationController::findAttributeCombinationById($attributeCombination->parent)->attribute_value_ids}}"
                                        class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Modify Parent
                                     </a>
                                     <button type="button" class="split-modal-single btn btn-outline-danger"><i class="fa fa-exclamation-triangle"></i> Split</button>
@@ -239,7 +239,7 @@
                 </div>
             </div>
 
-            <a href="/flyerproducts/public/combinations?id={{$attributeCombination->product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
+            <a href="/flyerproducts/combinations?id={{$attributeCombination->product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fas fa-chevron-left"></i> Back</a>
 
         </div>
     </div>
@@ -261,7 +261,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/flyerproducts/public/combinations/copy",
+                    url: "/flyerproducts/combinations/copy",
                     data: $('#copy').serialize(),
                     success: function (response) {
                         $('#copy-form').modal('hide');
@@ -322,7 +322,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/flyerproducts/public/combinations/split",
+                    url: "/flyerproducts/combinations/split",
                     data: $('#split-form').serialize(),
                     success: function (response) {
                         $('#split-holder').modal('hide');
