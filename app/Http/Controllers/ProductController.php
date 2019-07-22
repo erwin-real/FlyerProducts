@@ -67,11 +67,11 @@ class ProductController extends Controller
             $attribute->product_entity_id = $product->entity_id;
             $attribute->save();
         }
-        $attribute = new Attribute(array(
+        /*$attribute = new Attribute(array(
             'product_entity_id' => $product->entity_id,
             'name' => 'Print, Run and Delivery',
             'order' => count($request->get('attribute'))+1
-        ));
+        ));*/
 
         $attribute->product_entity_id = $product->entity_id;
         $attribute->save();
