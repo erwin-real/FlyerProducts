@@ -52,7 +52,7 @@
                                             <td class="align-middle">{{ $attributeValue->value }}</td>
                                             <td class="align-middle">{{ $attributeValue->details }}</td>
                                             <td class="align-middle">
-                                                <img src="/flyerproducts/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100%;" />
+                                                <img src="/flyerproducts/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100px;" />
                                             </td>
                                         </tr>
                                     @endforeach

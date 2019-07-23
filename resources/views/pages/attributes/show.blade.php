@@ -53,7 +53,7 @@
 
                         <div class="offset-1 col-10">
                             <span id="name">
-                                <img src="/flyerproducts/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100%;" />
+                                <img src="/flyerproducts/storage/imagepaths/{{$attributeValue->imagepath}}" alt="" style="width: 100px;" />
                             </span>
                         </div>
                     </div>
@@ -61,17 +61,43 @@
                     <div class="form-group row">
                         <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Actions') }}</b></label>
 
-
                         <div class="offset-1 col-10">
-                            <a href="/flyerproducts/attributes/{{$attributeValue->id}}/edit" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Update</a><br />
+                            <a href="/flyerproducts/attributes/{{$attributeValue->id}}/edit" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Update</a>
+                            {{--DELETE BUTTON--}}
+                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">
+                                <i class="fas fa-trash fa-sm fa-fw"></i>
+                                Delete
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <!-- DELETE Modal-->
+                    <div class="modal fade" id="delUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Attribute?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Are you sure you want to delete this attribute?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                                    <form action="{{ action('AttributeController@destroy', $attributeValue->id) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    {{--DELETE BUTTON--}}
-                    {{--<button class="btn btn-outline-danger" data-toggle="modal" data-target="#delUserModal">--}}
-                    {{--<i class="fas fa-trash fa-sm fa-fw"></i>--}}
-                    {{--Delete--}}
-                    {{--</button>--}}
                     <div class="clearfix"></div>
                 </div>
 

@@ -84,6 +84,11 @@ class AttributeController extends Controller
     }
 
     public function destroy($id) {
-        //
+        $attributeValue = AttributeValue::find($id);
+        $attribute_id = $attributeValue->attribute_id;
+        $attributeValue->delete();
+
+        return redirect('/attributes?id='.$attribute_id)
+            ->with('success', 'Deleted Attribute Value Successfully!');
     }
 }
