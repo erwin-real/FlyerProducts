@@ -33,6 +33,14 @@ class ProductController extends Controller
 
         $product->save();
 
+        $attribute = new Attribute(array(
+            'product_entity_id' => $product->entity_id,
+            'name' => 'Print, Run and Delivery',
+            'order' => 1
+        ));
+
+        $attribute->save();
+
         return redirect('/products/'. $product->entity_id)
             ->with('success', 'Added New Product Successfully!')
             ->with('product', $product);
@@ -49,13 +57,14 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product) {
         $validatedData = $request->validate([ 'name' => 'required' ]);
-
         $product->sku = $validatedData['name'];
-//        $product->details = $request->get('details');
-
         $product->save();
 
-        foreach ($product->attributes as $attribute) $attribute->delete();
+        if (count($product->attributes))
+
+//        foreach ($product->attributes as $attribute) $attribute->delete();
+
+
 
         for ($i = 0; $i < count($request->get('attribute')); $i++) {
             $attribute = new Attribute(array(
@@ -67,11 +76,6 @@ class ProductController extends Controller
             $attribute->product_entity_id = $product->entity_id;
             $attribute->save();
         }
-        /*$attribute = new Attribute(array(
-            'product_entity_id' => $product->entity_id,
-            'name' => 'Print, Run and Delivery',
-            'order' => count($request->get('attribute'))+1
-        ));*/
 
         $attribute->product_entity_id = $product->entity_id;
         $attribute->save();
