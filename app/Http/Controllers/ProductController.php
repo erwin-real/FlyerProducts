@@ -6,6 +6,7 @@ use App\Attribute;
 use App\AttributeValue;
 use App\Product;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -59,6 +60,9 @@ class ProductController extends Controller
     public function update(Request $request, Product $product) {
         $verifiedRequestAttributes = collect();
         $isSame = true;
+
+        $product->updated_at = Carbon::now();
+        $product->save();
 
         foreach ($request->get('attribute') as $attribute)
             if ($attribute != null) $verifiedRequestAttributes->push($attribute);

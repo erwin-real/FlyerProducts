@@ -56,6 +56,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Date Added') }}</b></label>
+
+                            <div class="offset-1 col-10">
+                                <span>{{ date('D M d, Y h:i a', strtotime($product->created_at)) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-12 col-form-label text-md-left"><b>{{ __('Date Modified') }}</b></label>
+
+                            <div class="offset-1 col-10">
+                                <span>{{ date('D M d, Y h:i a', strtotime($product->updated_at)) }}</span>
+                            </div>
+                        </div>
+
                         <div class="w-100 text-center">
 {{--                            <a href="/combinations/all?id={{$product->entity_id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-alt"></i> Combinations</a><br />--}}
                             <a href="/flyerproducts/combinations?id={{$product->entity_id}}" class="btn btn-outline-primary mt-3"><i class="fa fa-pencil-alt"></i> Combinations</a><br />

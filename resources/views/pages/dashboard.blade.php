@@ -179,7 +179,7 @@
                                     <tbody>
                                         @for ($i = 0; ($i < 5 && $i < count($products)); $i++)
                                             <tr>
-                                                <td><a href="/flyerproducts/products/{{$products[$i]->id}}">{{$products[$i]->sku}}</a></td>
+                                                <td><a href="/flyerproducts/products/{{$products[$i]->entity_id}}">{{$products[$i]->sku}}</a></td>
                                                 <td>{{count($products[$i]->attributes)}}</td>
                                                 <td>{{count($products[$i]->attributeCombinations)}}</td>
                                                 {{--<td>{{$customers[$i]->type}}</td>--}}
