@@ -18,6 +18,10 @@
                 </ol>
             </nav>
 
+            <div class="alert alert-danger">
+                If you change the Product's Attributes, all of the Attribute Values and Product Combinations will be lost.
+            </div>
+
             @include('includes.messages')
 
             <div class="container-fluid mt-5 col-lg-6 col-sm-7">
@@ -65,8 +69,8 @@
                                     <ol id="attributes">
                                         @foreach($product->attributes as $attribute)
                                             @if($attribute->name != "Print, Run and Delivery")
-                                                <li><input id="attributes[]" type="text" name="attribute[]" value="{{$attribute->name}}" required></li>
-                                                {{--<li><input type="text" name="attribute[]" value="{{$attribute->name}}"> <span class="text-danger" style="cursor: pointer;" onclick="deleteItem(this)">x</span></li>--}}
+                                                <li><input id="attributes[]" type="text" name="attribute[]" value="{{$attribute->name}}" required><span class="text-danger" style="cursor: pointer;" onclick="deleteItem(this)"> x</span></li>
+                                                {{--<li><input type="text" name="attribute[]" value="{{$attribute->name}}"></li>--}}
                                             @endif
                                         @endforeach
                                         <li><input type="hidden" name="attribute[]" value="Print, Run and Delivery">Print, Run and Delivery</li>
@@ -81,7 +85,7 @@
                             </div>
                             <button type="button" class="ml-3 btn btn-outline-primary" onclick="append()"><i class="fa fa-plus"></i> Add Attribute</button>
 
-                            <div class="form-group row mb-0 text-center">
+                            <div class="form-group row mb-0 mt-4 text-center">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-outline-primary">
                                         <i class="fa fa-check"></i> {{ __('Save') }}
@@ -100,27 +104,25 @@
         function append() {
             let newItem = document.createElement("li");
 
-            let node_value = document.createElement("input");
-            node_value.type = 'text';
-            node_value.name = 'attribute[]';
-            node_value.setAttribute("required", "required");
-            newItem.appendChild(node_value);
+            let input = document.createElement("input");
+            input.id='attributes[]';
+            input.type = 'text';
+            input.name = 'attribute[]';
+            input.setAttribute("required", "required");
+            newItem.appendChild(input);
+
+            let span = document.createElement("span");
+            span.style = 'cursor: pointer; color: #e74a3b;';
+            span.setAttribute("onclick","deleteItem(this)");
+            span.innerHTML = " x";
+            newItem.appendChild(span);
 
             let list = document.getElementById("attributes");
             list.insertBefore(newItem, list.childNodes[list.childNodes.length-2]);
         }
 
         function deleteItem(r) {
-            // console.log(document.getElementById("attributes").getElementsByTagName("li").length - 1);
-            let lists = document.getElementById("attributes").getElementsByTagName("li");
-            let value = r.parentNode.childNodes[0].value;
-
-            for (let i = 0; i < lists.length - 1; i++) {
-                console.log(lists);
-            }
-
-            // let i = (r.parentNode.parentNode.rowIndex);
-            // document.getElementById("materialsTable").deleteRow(i);
+            document.getElementById("attributes").removeChild(r.parentNode);
         }
 
     </script>

@@ -16,24 +16,24 @@
         @include('includes.messages')
 
         <!-- Content Row -->
-        {{--<div class="row">--}}
+        <div class="row">
 
-            {{--<!-- Earnings (Monthly) Card Example -->--}}
-            {{--<div class="col-xl-3 col-md-6 mb-4">--}}
-                {{--<div class="card border-left-primary shadow h-100 py-2">--}}
-                    {{--<div class="card-body">--}}
-                        {{--<div class="row no-gutters align-items-center">--}}
-                            {{--<div class="col mr-2">--}}
-                                {{--<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Customers</div>--}}
-                                {{--<div class="h5 mb-0 font-weight-bold text-gray-800">{{count($customers)}}</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-auto">--}}
-                                {{--<i class="fas fa-user-tie fa-2x text-gray-300"></i>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Products</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($products)}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-puzzle-piece fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {{--<!-- Earnings (Monthly) Card Example -->--}}
             {{--<div class="col-xl-3 col-md-6 mb-4">--}}
@@ -85,7 +85,7 @@
                     {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
-        {{--</div>--}}
+        </div>
 
         {{--<div class="row">--}}
 
@@ -149,50 +149,52 @@
 
         {{--<!-- Content Row -->--}}
 
-        {{--<div class="row">--}}
+        <div class="row">
 
-            {{--<!-- CUSTOMERS -->--}}
-            {{--<div class="col-12 col-lg-6">--}}
-                {{--<div class="card shadow mb-4">--}}
-                    {{--<!-- Card Header - Dropdown -->--}}
-                    {{--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">--}}
-                        {{--<h6 class="m-0 font-weight-bold text-primary">Customers Overview</h6>--}}
-                        {{--<div class="dropdown no-arrow">--}}
-                            {{--<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                {{--<a href="/customers"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Card Body -->--}}
+            <!-- CUSTOMERS -->
+            <div class="col-12 col-lg-6">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Products Overview</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a href="/flyerproducts/products"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
 
-                    {{--<div class="card-body">--}}
-                        {{--@if(count($customers) > 0)--}}
-                            {{--<div class="table-responsive">--}}
-                                {{--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">--}}
-                                    {{--<thead>--}}
-                                    {{--<tr>--}}
-                                        {{--<th>Customer</th>--}}
-                                        {{--<th>Type</th>--}}
-                                        {{--<th>Email Address</th>--}}
-                                    {{--</tr>--}}
-                                    {{--</thead>--}}
-                                    {{--<tbody>--}}
-                                    {{--@for ($i = 0; ($i < 5 && $i < count($customers)); $i++)--}}
-                                        {{--<tr>--}}
-                                            {{--<td><a href="/customers/{{$customers[$i]->id}}">{{$customers[$i]->name}}</a></td>--}}
-                                            {{--<td>{{$customers[$i]->type}}</td>--}}
-                                            {{--<td>{{$customers[$i]->email}}</td>--}}
-                                        {{--</tr>--}}
-                                    {{--@endfor--}}
-                                    {{--</tbody>--}}
-                                {{--</table>--}}
-                            {{--</div>--}}
-                        {{--@else--}}
-                            {{--No customers yet ...--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+                    <div class="card-body">
+                        @if(count($products) > 0)
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>SKU</th>
+                                        <th>Attributes</th>
+                                        <th>Combinations</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for ($i = 0; ($i < 5 && $i < count($products)); $i++)
+                                            <tr>
+                                                <td><a href="/flyerproducts/products/{{$products[$i]->id}}">{{$products[$i]->sku}}</a></td>
+                                                <td>{{count($products[$i]->attributes)}}</td>
+                                                <td>{{count($products[$i]->attributeCombinations)}}</td>
+                                                {{--<td>{{$customers[$i]->type}}</td>--}}
+                                                {{--<td>{{$customers[$i]->email}}</td>--}}
+                                            </tr>
+                                        @endfor
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            No products yet ...
+                        @endif
+                    </div>
+                </div>
+            </div>
 
             {{--<!-- SUPPLIERS -->--}}
             {{--<div class="col-12 col-lg-6">--}}
@@ -322,8 +324,8 @@
                     {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
-        {{--</div>--}}
+        </div>
 
-    {{--</div>--}}
+    </div>
 
 @endsection
