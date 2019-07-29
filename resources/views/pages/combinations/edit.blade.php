@@ -121,6 +121,7 @@
             td = document.createElement("td");
             let node_price = document.createElement("input");
             node_price.type = 'number';
+            node_price.step = 'any';
             node_price.name = 'price[]';
             node_price.className = 'form-control';
             node_price.setAttribute("required", "required");
