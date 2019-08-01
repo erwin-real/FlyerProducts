@@ -26,6 +26,11 @@
             <i class="fas fa-fw fa-puzzle-piece"></i>
             <span>Products</span></a>
     </li>
+    <li class="nav-item {{ request()->is('account') || request()->is('account/*') ? 'active border-left-info' : '' }}">
+        <a class="nav-link" href="/flyerproducts/account">
+            <i class="fas fa-fw fa-user-tie"></i>
+            <span>Account</span></a>
+    </li>
     {{--<li class="nav-item {{ request()->is('companyInfo') || request()->is('companyInfo/*') ? 'active border-left-info' : '' }}">--}}
         {{--<a class="nav-link" href="/dashboard">--}}
             {{--<i class="fas fa-fw fa-info"></i>--}}
@@ -45,11 +50,6 @@
         {{--<a class="nav-link" href="/dashboard">--}}
             {{--<i class="fas fa-fw fa-tools"></i>--}}
             {{--<span>Materials</span></a>--}}
-    {{--</li>--}}
-    {{--<li class="nav-item {{ request()->is('users') || request()->is('users/*') ? 'active border-left-info' : '' }}">--}}
-        {{--<a class="nav-link" href="/dashboard">--}}
-            {{--<i class="fas fa-fw fa-users"></i>--}}
-            {{--<span>Users</span></a>--}}
     {{--</li>--}}
     {{--</li><li class="nav-item {{ request()->is('companyInfo') || request()->is('companyInfo/*') ? 'active border-left-info' : '' }}">--}}
         {{--<a class="nav-link" href="/companyInfo">--}}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -15,10 +17,6 @@ class DashboardController extends Controller
 
     public function index() {
         return view('pages.dashboard')->with('products', Product::all());
-//        return view('pages.products.index')->with('products', Product::all());
     }
 
-//    public function welcome() {
-//        dd(User::all());
-//    }
 }

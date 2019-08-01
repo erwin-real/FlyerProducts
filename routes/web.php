@@ -24,6 +24,11 @@ Route::post('/combinations/copy', 'CombinationController@copy');
 Route::post('/combinations/split', 'CombinationController@split');
 Route::post('/combinations/split-single', 'CombinationController@splitSingle');
 
+// Account
+Route::get('/account','AccountController@index');
+Route::get('/account/change-password','AccountController@showChangePasswordForm');
+Route::post('/account/change-password','AccountController@changePassword');
+
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');
 //Route::post('/attributes/{attribute}','AttributeController@store');
