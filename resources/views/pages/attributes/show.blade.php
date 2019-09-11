@@ -68,6 +68,13 @@
                                 <i class="fas fa-trash fa-sm fa-fw"></i>
                                 Delete
                             </button>
+                            <br>
+
+                            {{--@if(session('success') == "Added New Attribute Value Successfully!")--}}
+                                {{--<a href="/flyerproducts/attributes/create?id={{$attributeValue->attribute->id}}" class="btn btn-outline-success mt-2"><i class="fa fa-plus"></i>--}}
+                                    {{--Add more attribute value for attribute {{$attributeValue->attribute->name}}--}}
+                                {{--</a>--}}
+                            {{--@endif--}}
                         </div>
 
                     </div>

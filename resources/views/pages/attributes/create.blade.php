@@ -29,7 +29,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{ action('AttributeController@store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ action('AttributeController@store') }}" method="POST" enctype="multipart/form-data" onsubmit="return checkForm(this);">
                             @csrf
                             <input type="hidden" name="id" value="{{$attribute->id}}">
 
@@ -75,8 +75,8 @@
 
                             <div class="form-group row mb-0 text-center">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-outline-primary">
-                                        <i class="fa fa-check"></i> {{ __('Save') }}
+                                    <button type="submit" id="submitButton" class="btn btn-outline-primary">
+                                        <i class="fa fa-check"></i> {{ __('Save and Add More') }}
                                     </button>
                                 </div>
                             </div>
@@ -87,4 +87,12 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        function checkForm(form){
+            form.submitButton.disabled = true;
+            return true;
+        }
+    </script>
 @endsection

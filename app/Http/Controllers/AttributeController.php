@@ -44,7 +44,11 @@ class AttributeController extends Controller
 
         $attributeValue->save();
 
-        return redirect('/attributes/'. $attributeValue->id)
+//        return redirect('/attributes/'. $attributeValue->id)
+//            ->with('success', 'Added New Attribute Value Successfully!')
+//            ->with('attribute', $attribute);
+
+        return redirect('/attributes/create?id='. $attribute->id)
             ->with('success', 'Added New Attribute Value Successfully!')
             ->with('attribute', $attribute);
     }
