@@ -49,7 +49,7 @@ class AttributeController extends Controller
 //            ->with('attribute', $attribute);
 
         return redirect('/attributes/create?id='. $attribute->id)
-            ->with('success', 'Added New Attribute Value Successfully!')
+            ->with('success', 'Added New Attribute Value, '. $attributeValue->value .', Successfully!')
             ->with('attribute', $attribute);
     }
 
