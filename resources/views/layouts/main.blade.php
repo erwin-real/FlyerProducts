@@ -79,11 +79,8 @@
 
     <script>
         $(document).ready(function() {
-            $(".alert-success").fadeTo(5000, 500).slideUp(500, function() {
-                $(".alert-success").slideUp(500);
-            });
-            $(".alert-danger").fadeTo(5000, 500).slideUp(500, function() {
-                $(".alert-danger").slideUp(500);
+            $(".alerts").fadeTo(5000, 500).slideUp(500, function() {
+                $(".alerts").slideUp(500);
             });
         });
     </script>

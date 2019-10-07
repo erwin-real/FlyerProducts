@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 class CombinationController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('auth');
-    }
+    public function __construct() { $this->middleware('auth'); }
 
     public function index(Request $request) {
         return view('pages.combinations.index')->with('product', Product::find($request->get('id')));
@@ -94,7 +92,11 @@ class CombinationController extends Controller
     }
 
     public function destroy($id) {
-        //
+        $attributeCombination = AttributeCombination::find($id);
+        $attributeCombination->delete();
+        return redirect('/combinations?id='. $attributeCombination->product->entity_id)
+            ->with('success', 'Deleted Combination Successfully!')
+            ->with('product', $attributeCombination->product);
     }
 
     public static function findAttributeValueById($id) { return AttributeValue::find($id); }
@@ -215,4 +217,10 @@ class CombinationController extends Controller
             ->with('childs', $childs);
 
     }
+
+    public function delete(Request $request) {
+        AttributeCombination::find($request->input('combinationID'))->delete();
+        return $request;
+    }
+
 }

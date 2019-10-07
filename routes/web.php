@@ -23,6 +23,7 @@ Route::post('/combinations/evaluate', 'CombinationController@evaluate');
 Route::post('/combinations/copy', 'CombinationController@copy');
 Route::post('/combinations/split', 'CombinationController@split');
 Route::post('/combinations/split-single', 'CombinationController@splitSingle');
+Route::post('/combinations/delete', 'CombinationController@delete');
 
 // Account
 Route::get('/account','AccountController@index');
