@@ -9,7 +9,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                <!-- <li class="breadcrumb-item" aria-current="page"><a href="/users">Users</a></li>
+                <!-- <li class="breadcrumb-item" aria-current="page"><a href="/account">Users</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Guide</li> -->
             </ol>
         </nav>
@@ -310,7 +310,7 @@
                                         {{--<tr>--}}
                                             {{--<td><a href="/purchaseRequests/{{$purchaseRequests[$i]->id}}">{{$purchaseRequests[$i]->pr}}</a></td>--}}
                                             {{--<td>{{$purchaseRequests[$i]->department}}</td>--}}
-                                            {{--<td><a href="/users/{{$purchaseRequests[$i]->user->id}}">{{$purchaseRequests[$i]->user->fname}} {{$purchaseRequests[$i]->user->lname}}</a></td>--}}
+                                            {{--<td><a href="/account/{{$purchaseRequests[$i]->user->id}}">{{$purchaseRequests[$i]->user->fname}} {{$purchaseRequests[$i]->user->lname}}</a></td>--}}
                                         {{--</tr>--}}
                                     {{--@endfor--}}
                                     {{--</tbody>--}}

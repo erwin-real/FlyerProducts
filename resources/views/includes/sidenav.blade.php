@@ -26,6 +26,13 @@
             <i class="fas fa-fw fa-puzzle-piece"></i>
             <span>Products</span></a>
     </li>
+    @if(Auth::user()->is_admin)
+        <li class="nav-item {{ request()->is('users') || request()->is('users/*') ? 'active border-left-info' : '' }}">
+            <a class="nav-link" href="/flyerproducts/users">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Users</span></a>
+        </li>
+    @endif
     <li class="nav-item {{ request()->is('account') || request()->is('account/*') ? 'active border-left-info' : '' }}">
         <a class="nav-link" href="/flyerproducts/account">
             <i class="fas fa-fw fa-user-tie"></i>
@@ -43,7 +50,7 @@
     {{--</li>--}}
     {{--<li class="nav-item {{ request()->is('suppliers') || request()->is('suppliers/*') ? 'active border-left-info' : '' }}">--}}
         {{--<a class="nav-link" href="/dashboard">--}}
-            {{--<i class="fas fa-fw fa-users-cog"></i>--}}
+            {{--<i class="fas fa-fw faccountrs-cog"></i>--}}
             {{--<span>Suppliers</span></a>--}}
     {{--</li>--}}
     {{--<li class="nav-item {{ request()->is('materials') || request()->is('materials/*') ? 'active border-left-info' : '' }}">--}}
@@ -63,7 +70,7 @@
     {{--</li>--}}
     {{--<li class="nav-item {{ request()->is('suppliers') || request()->is('suppliers/*') ? 'active border-left-info' : '' }}">--}}
         {{--<a class="nav-link" href="/suppliers">--}}
-            {{--<i class="fas fa-fw fa-users-cog"></i>--}}
+            {{--<i class="fas fa-fw faccountrs-cog"></i>--}}
             {{--<span>Suppliers</span></a>--}}
     {{--</li>--}}
     {{--<li class="nav-item {{ request()->is('materials') || request()->is('materials/*') ? 'active border-left-info' : '' }}">--}}

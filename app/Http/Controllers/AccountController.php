@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('auth');
-    }
+    public function __construct() { $this->middleware('auth'); }
 
     public function index() {
-        return view('pages.users.index')->with('account', Auth::user());
+        return view('pages.account.index')->with('account', Auth::user());
     }
 
     // CHANGE PASSWORD
     public function showChangePasswordForm(){
-        return view('pages.users.changepassword')->with('account', Auth::user());
+        return view('pages.account.changepassword')->with('account', Auth::user());
     }
 
     public function changePassword(Request $request){

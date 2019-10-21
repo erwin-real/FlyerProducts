@@ -30,6 +30,10 @@ Route::get('/account','AccountController@index');
 Route::get('/account/change-password','AccountController@showChangePasswordForm');
 Route::post('/account/change-password','AccountController@changePassword');
 
+// Users Change Password
+Route::get('/users/change-password','UserController@showChangePasswordForm');
+Route::post('/users/change-password','UserController@changePassword');
+
 // ATTRIBUTES
 //Route::get('/attributes/{attribute}','AttributeController@show');
 //Route::post('/attributes/{attribute}','AttributeController@store');
@@ -60,3 +64,4 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::resource('combinations', 'CombinationController');
 Route::resource('products', 'ProductController');
 Route::resource('attributes', 'AttributeController');
+Route::resource('users', 'UserController');

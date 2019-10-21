@@ -9,7 +9,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                <!-- <li class="breadcrumb-item" aria-current="page"><a href="/users">Users</a></li>
+                <!-- <li class="breadcrumb-item" aria-current="page"><a href="/account">Users</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Guide</li> -->
             </ol>
         </nav>
@@ -18,7 +18,7 @@
         <!-- Content Row -->
         <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- PRODUCTS -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -35,22 +35,24 @@
                 </div>
             </div>
 
-            {{--<!-- Earnings (Monthly) Card Example -->--}}
-            {{--<div class="col-xl-3 col-md-6 mb-4">--}}
-                {{--<div class="card border-left-success shadow h-100 py-2">--}}
-                    {{--<div class="card-body">--}}
-                        {{--<div class="row no-gutters align-items-center">--}}
-                            {{--<div class="col mr-2">--}}
-                                {{--<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Suppliers</div>--}}
-                                {{--<div class="h5 mb-0 font-weight-bold text-gray-800">{{count($suppliers)}}</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-auto">--}}
-                                {{--<i class="fas fa-users-cog fa-2x text-gray-300"></i>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            {{--<!-- USERS -->--}}
+            @if(Auth::user()->is_admin)
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Users</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($users)}}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-users fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             {{--<!-- Earnings (Monthly) Card Example -->--}}
             {{--<div class="col-xl-3 col-md-6 mb-4">--}}
@@ -96,7 +98,7 @@
                         {{--<h6 class="m-0 font-weight-bold text-primary">User's Photo</h6>--}}
                         {{--<div class="dropdown no-arrow">--}}
                             {{--<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                {{--<a href="/users/{{Auth::user()->id}}"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
+                                {{--<a href="/account/{{Auth::user()->id}}"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
                             {{--</a>--}}
                         {{--</div>--}}
                     {{--</div>--}}
@@ -118,7 +120,7 @@
                         {{--<h6 class="m-0 font-weight-bold text-primary">User's Info</h6>--}}
                         {{--<div class="dropdown no-arrow">--}}
                             {{--<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                {{--<a href="/users/{{Auth::user()->id}}"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
+                                {{--<a href="/account/{{Auth::user()->id}}"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
                             {{--</a>--}}
                         {{--</div>--}}
                     {{--</div>--}}
@@ -151,7 +153,7 @@
 
         <div class="row">
 
-            <!-- CUSTOMERS -->
+            <!-- PRODUCTS -->
             <div class="col-12 col-lg-6">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
@@ -182,8 +184,6 @@
                                                 <td><a href="/flyerproducts/products/{{$products[$i]->entity_id}}">{{$products[$i]->sku}}</a></td>
                                                 <td>{{count($products[$i]->attributes)}}</td>
                                                 <td>{{count($products[$i]->attributeCombinations)}}</td>
-                                                {{--<td>{{$customers[$i]->type}}</td>--}}
-                                                {{--<td>{{$customers[$i]->email}}</td>--}}
                                             </tr>
                                         @endfor
                                     </tbody>
@@ -196,48 +196,48 @@
                 </div>
             </div>
 
-            {{--<!-- SUPPLIERS -->--}}
-            {{--<div class="col-12 col-lg-6">--}}
-                {{--<div class="card shadow mb-4">--}}
-                    {{--<!-- Card Header - Dropdown -->--}}
-                    {{--<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">--}}
-                        {{--<h6 class="m-0 font-weight-bold text-primary">Suppliers Overview</h6>--}}
-                        {{--<div class="dropdown no-arrow">--}}
-                            {{--<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                {{--<a href="/suppliers"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- Card Body -->--}}
+            {{--<!-- USERS -->--}}
+            @if(Auth::user()->is_admin)
+                <div class="col-12 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Users Overview</h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a href="/flyerproducts/users"><i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i></a>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Card Body -->
 
-                    {{--<div class="card-body">--}}
-                        {{--@if(count($suppliers) > 0)--}}
-                        {{--<div class="table-responsive">--}}
-                            {{--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<th>Company Name</th>--}}
-                                    {{--<th>Contact Person</th>--}}
-                                    {{--<th>Email Address</th>--}}
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody>--}}
-                                {{--@for ($i = 0; ($i < 5 && $i < count($suppliers)); $i++)--}}
-                                    {{--<tr>--}}
-                                        {{--<td><a href="/suppliers/{{$suppliers[$i]->id}}">{{$suppliers[$i]->name}}</a></td>--}}
-                                        {{--<td>{{$suppliers[$i]->person}}</td>--}}
-                                        {{--<td>{{$suppliers[$i]->email}}</td>--}}
-                                    {{--</tr>--}}
-                                {{--@endfor--}}
-                                {{--</tbody>--}}
-                            {{--</table>--}}
-                        {{--</div>--}}
-                        {{--@else--}}
-                            {{--No suppliers yet ...--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+                        <div class="card-body">
+                            @if(count($users) > 0)
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email Address</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for ($i = 0; ($i < 5 && $i < count($users)); $i++)
+                                                <tr>
+                                                    <td><a href="/flyerproducts/users/{{$users[$i]->id}}">{{$users[$i]->name}}</a></td>
+                                                    <td>{{$users[$i]->email}}</td>
+                                                </tr>
+                                            @endfor
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                No other users yet ...
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             {{--<!-- MATERIALS -->--}}
             {{--<div class="col-12 col-lg-6">--}}
@@ -312,7 +312,7 @@
                                         {{--<tr>--}}
                                             {{--<td><a href="/purchaseRequests/{{$purchaseRequests[$i]->id}}">{{$purchaseRequests[$i]->pr}}</a></td>--}}
                                             {{--<td>{{$purchaseRequests[$i]->department}}</td>--}}
-                                            {{--<td><a href="/users/{{$purchaseRequests[$i]->user->id}}">{{$purchaseRequests[$i]->user->fname}} {{$purchaseRequests[$i]->user->lname}}</a></td>--}}
+                                            {{--<td><a href="/account/{{$purchaseRequests[$i]->user->id}}">{{$purchaseRequests[$i]->user->fname}} {{$purchaseRequests[$i]->user->lname}}</a></td>--}}
                                         {{--</tr>--}}
                                     {{--@endfor--}}
                                     {{--</tbody>--}}

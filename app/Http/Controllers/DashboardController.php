@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Hash;
 class DashboardController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware('auth');
-    }
+    public function __construct() { $this->middleware('auth'); }
 
     public function index() {
-        return view('pages.dashboard')->with('products', Product::all());
+        return view('pages.dashboard')
+            ->with('products', Product::all())
+            ->with('users', User::where('is_admin', 0)->get());
     }
 
 }
