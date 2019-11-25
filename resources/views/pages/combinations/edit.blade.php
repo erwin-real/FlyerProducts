@@ -73,7 +73,7 @@
                                                         <input type="number" name="quantity[]" class="form-control" required="required" value="{{$price->quantity}}">
                                                     </td>
                                                     <td>
-                                                        <input type="number" name="price[]" class="form-control" required="required" value="{{$price->price}}">
+                                                        <input type="number" name="price[]" class="form-control" step="any" required="required" value="{{$price->price}}">
                                                     </td>
                                                     <td class="text-center"><i class="fa fa-trash del-btn" onclick="deleteRow(this)" style="cursor: pointer;"></i></td>
                                                 </tr>
